@@ -1,0 +1,30 @@
+<ion-grid>
+    <ion-row>
+        <ion-card>
+            <img src="../../assets/imgs/logo.svg" width="80px" height="80px" />
+            <ion-card-content>
+                <form #form (ngSubmit)="login($event)">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label floating>Username</ion-label>
+                            <ion-input required name="username" type="email" [(ngModel)]="username"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label floating>Password</ion-label>
+                            <ion-input required name="password" type="password" [(ngModel)]="password"></ion-input>
+                        </ion-item>
+                        <span *ngIf="isLoading">Loading...</span>
+                        <span *ngIf="loginError">Usuario o contrasena no valido.</span>
+                        <span *ngIf="formNotValid">Email no valido.</span>
+                    </ion-list>
+                    <div style="margin-top: 15px;">
+                        <button ion-button full type="submit">Login</button>
+                    </div>
+                </form>
+            </ion-card-content>
+        </ion-card>
+        <ion-content style="padding: 10px; margin-top: 15px;">
+            <a (click)="goToRegisterPage()">No tienes una cuenta? Registrate</a>
+        </ion-content>
+    </ion-row>
+</ion-grid>

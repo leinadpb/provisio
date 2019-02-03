@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -8,17 +8,19 @@ import { LoginPage } from '../pages/login/login';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SqliteDatabaseService } from '../services/sqlite-database-service';
+import { AuthService } from '../services/auth-service';
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit{
 
   private rootPage: any = LoginPage;
-  private isReady: boolean = false;
+  @Input() private isReady: boolean = false;
+  private authStream: Subscription;
 
   constructor(platform: Platform, statusBar: StatusBar, private splashScreen: SplashScreen,
-    private db: SqliteDatabaseService) 
+    private db: SqliteDatabaseService, private auth: AuthService) 
   {
     splashScreen.show();
     platform.ready().then(() => {
@@ -27,20 +29,47 @@ export class MyApp {
       statusBar.styleDefault();
       
       this.verifyPageToStart();
-      
-      splashScreen.hide();
+
+      this.isReady = true;
+      this.splashScreen.hide();
+
+    });
+  }
+
+  ngOnInit(): void {
+
+    // Not being used until varifyPageToStart is ready!
+    let authStream = this.auth.authenticationStream.subscribe(data => {
+      if (data.loggedIn) {
+
+          // Start app
+          this.isReady = true;
+          this.splashScreen.hide();
+
+      }
     });
   }
 
   verifyPageToStart() {
-    let userEmail = this.db.get('current-user-app');
-    if (!!userEmail) {
-      let isAuth = this.db.get(userEmail);
-      if (isAuth) {
-        this.rootPage = TabsPage;
-      }
-    }
 
-    this.isReady = true;
+    /// Not working yet.....
+
+    // this.db.get('current-user-app').then(userEmail => {
+      
+    //   console.log('user stored email: ', userEmail);
+      
+    //   if (userEmail != undefined) {
+
+    //     this.db.get(userEmail).then(password => {
+
+    //       console.log('Password hash ', password);
+          
+    //       if (!!password) {
+    //         this.auth.login(userEmail, password);
+    //       }
+
+    //     });
+    //   }
+    // });
   }
 }

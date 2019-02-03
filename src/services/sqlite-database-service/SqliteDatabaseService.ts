@@ -41,10 +41,7 @@ export class SqliteDatabaseService {
 
     get (key: any): any {
         if (!!key) {
-            this.storage.get(key).then(data => {
-                return data;
-            });
+            return this.storage.get(key);
         }
-        return null;
     }
 }

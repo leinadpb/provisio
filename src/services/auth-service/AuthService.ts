@@ -20,7 +20,7 @@ export class AuthService {
             this.isAuth = true;
             this.userEmail = username;
             this.db.add('current-user-app', this.userEmail);
-            this.db.add(this.userEmail, this.isAuth);
+            this.db.add(this.userEmail, result.user.displayName );
             this.authenticationStream.emit(
                 {
                     username: username, 
@@ -43,6 +43,8 @@ export class AuthService {
     logout() {
         this.auth.logout().then(result => {
             this.isAuth = false;
+            this.db.remove('current-user-app');
+            this.db.remove(this.userEmail);
             this.userEmail = '';
             this.authenticationStream.emit({
                 loggedIn: false

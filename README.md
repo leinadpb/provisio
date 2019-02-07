@@ -1,6 +1,6 @@
 
 # Provision
-![Provision logo](https://github.com/leinadpb/provision/src/assets/imgs/logo.svg "Provision App")
+![Provision logo](https://raw.githubusercontent.com/leinadpb/provision/master/src/assets/imgs/logo.svg "Provision App")
 
 ### Please READ this file before start making changes to this project.
 
@@ -29,5 +29,5 @@
 - 2. Add it to the **declarations** array
 - 3. Add it to the **entryComponents** array
 
-***Happy coding! :D ***
+***Happy coding! :D***
 ___

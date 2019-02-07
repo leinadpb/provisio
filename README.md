@@ -1,6 +1,6 @@
 
 # Provision
-![Provision logo](https://raw.githubusercontent.com/leinadpb/provision/master/src/assets/imgs/logo.svg "Provision App")
+![Provision logo](https://raw.githubusercontent.com/leinadpb/provision/master/src/assets/imgs/logo.png "Provision App")
 
 ### Please READ this file before start making changes to this project.
 

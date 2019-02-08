@@ -1,9 +1,9 @@
 import { Input, Component, Output, OnDestroy, EventEmitter, OnInit, ErrorHandler, ViewChild} from "@angular/core";
-import { NavController, Form } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AuthService } from '../../services/auth-service';
 import { Subscription } from "rxjs";
-import { Validators, FormBuilder, FormGroup, FormControl, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { RegisterPage } from '../register/register';
 
 @Component({

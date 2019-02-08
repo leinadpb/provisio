@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
-import { ConfigService } from '../../services/config-service';
 import { AuthService } from '../../services/auth-service';
 
 @Component({

@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { SqliteDatabaseService } from '../sqlite-database-service';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { FirebaseService } from '../Firebase/FirebaseService';
 

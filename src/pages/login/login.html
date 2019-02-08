@@ -6,12 +6,12 @@
                 <form #form (ngSubmit)="login($event)">
                     <ion-list>
                         <ion-item>
-                            <ion-label floating>Username</ion-label>
-                            <ion-input required name="username" type="email" [(ngModel)]="username"></ion-input>
+                            <ion-label stacked>Username</ion-label>
+                            <ion-input required name="username" placeholder="test@test.com" type="email" [(ngModel)]="username"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label floating>Password</ion-label>
-                            <ion-input required name="password" type="password" [(ngModel)]="password"></ion-input>
+                            <ion-label stacked>Password</ion-label>
+                            <ion-input required name="password" placeholder="admin123" type="password" [(ngModel)]="password"></ion-input>
                         </ion-item>
                         <span *ngIf="isLoading">Loading...</span>
                         <span *ngIf="loginError">Usuario o contrasena no valido.</span>

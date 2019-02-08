@@ -17,7 +17,7 @@
 3. Run: `npm install`
 4. Run: `npm start` or `ionic serve` to run it in a browser.
 4. Run: `ionic cordova run android`.
-*_You can pass `--live-reload` options after any of the "run" commands to better debugging experience._*
+*_You can pass `--livereload` options after any of the "run" commands to better debugging experience._*
 
 #### Good practices
 * **DON'T** use inline styles, always classes.

@@ -12,7 +12,7 @@ export class ProfilePage implements OnInit, OnDestroy {
 
     private loggedOut: Subscription;
 
-    constructor(private app: App, private auth: AuthService, private nvCtrl: NavController) {}
+    constructor(private app: App, private auth: AuthService) {}
 
     ngOnInit(): void {
         this.loggedOut = this.auth.authenticationStream.subscribe(data => {

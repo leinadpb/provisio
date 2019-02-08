@@ -11,7 +11,7 @@ export class AboutPage implements OnInit{
 
   private text: string;
 
-  constructor(public navCtrl: NavController, private authService: AuthService) {
+  constructor(public navCtrl: NavController) {
 
   }
 

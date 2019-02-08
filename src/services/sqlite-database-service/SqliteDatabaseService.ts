@@ -21,7 +21,7 @@ export class SqliteDatabaseService {
 
     remove (key: any) {
         if (!!key) {
-            let value = this.storage.get(key).then(value => {
+            this.storage.get(key).then(value => {
                 this.storage.remove(key);
                 this.removedValue.emit({key: key, value: value});
             });

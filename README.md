@@ -1,6 +1,6 @@
 
 # Provisio
-![Provisio logo](https://raw.githubusercontent.com/leinadpb/provisio/master/src/assets/imgs/logo.png "Provisio App")
+![Provisio logo](https://raw.githubusercontent.com/leinadpb/provisio/master/src/assets/imgs/logo.png=100x100 "Provisio App")
 
 ### Please READ this file before start making changes to this project.
 

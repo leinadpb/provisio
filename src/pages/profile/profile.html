@@ -1,22 +1,43 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar text-center color="primary">
         <ion-title>My profile</ion-title>
     </ion-navbar>
 </ion-header>
 <ion-card style="margin-top: 80px;">
     <ion-item>
         <ion-avatar item-start>
-            <img src="../../assets/imgs/no-photo.png">
+            <img src="https://s3.amazonaws.com/ionic-io-static/zuk86c6dRsGcPZzkmUy5_jhon-snow.jpg">
         </ion-avatar>
-        <h2>Daniel Pena</h2>
-        <p>15 recetas</p>
+        <h2>Jon Snow</h2>
+        <p>I'm looking for horse saddles</p>
     </ion-item>
 </ion-card>
-<ion-card>
-    <ion-card-header>
-        Actions
-    </ion-card-header>
+
+<ion-item>
+ <p style="font-size:16px;font-style:regular;">
+   <b>Primary User Information</b> <span class="right"> </span>
+ </p>
+ </ion-item>
+
+    <ion-list>
+        <ion-item>
+         <ion-label><strong>Name:</strong> Jon Snow</ion-label>
+     </ion-item>
+        <ion-item>
+         <ion-label><strong>Last Name:</strong> Snow</ion-label>
+    </ion-item>
+         <ion-item>
+         <ion-label><strong>E-mail:</strong> gameofthrones@jonsnow.com</ion-label>
+     </ion-item>
+     <ion-item>
+         <ion-label><strong>Country:</strong> Winterfell</ion-label>
+     </ion-item>
+        </ion-list>
+
+
+<ion-card> 
     <ion-card-content>
         <button ion-button color="secondary" (click)="logout()">Logout</button>
     </ion-card-content>
 </ion-card>
+

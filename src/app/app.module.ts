@@ -4,14 +4,15 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
+
 // Pages
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
+import { AddproductPage } from '../pages/addproduct/addproduct';
 
 // Components
 import { StatusBar } from '@ionic-native/status-bar';
@@ -35,12 +36,12 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    AddproductPage,
   ],
   imports: [
     BrowserModule,
@@ -55,12 +56,12 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    AddproductPage,
   ],
   providers: [
     // Ours

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
 import { AuthService } from '../../services/auth-service/AuthService';
 
 @Component({
@@ -21,6 +20,7 @@ export class AboutPage implements OnInit{
       // this.text = this.authService.testService(); 
     }
   }
+
 
 
 }

@@ -1,6 +1,6 @@
 <ion-grid>
     <ion-row>
-        <ion-card>
+        <ion-card style="padding-top: 20px;">
             <img src="../../assets/imgs/logo.svg" width="50px" height="60px" />
             <ion-card-content>
                 <form #form (ngSubmit)="login($event)">
@@ -23,8 +23,8 @@
                 </form>
             </ion-card-content>
         </ion-card>
-        <ion-content style="padding: 10px; margin-top: 15px;">
+        <div style="padding: 10px; margin-top: 15px;">
             <a (click)="goToRegisterPage()">No tienes una cuenta? Registrate</a>
-        </ion-content>
+        </div>
     </ion-row>
 </ion-grid>

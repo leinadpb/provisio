@@ -1,42 +1,168 @@
-<ion-card>
-    <ion-card-title>Crea una cuenta!</ion-card-title>
-    <ion-card-content>
-        <form (ngSubmit)="register($event)">
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-6>
-                        <ion-item>
-                            <ion-label floating>Nombres</ion-label>
-                            <ion-input required name="name" type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6>
-                        <ion-item>
-                            <ion-label floating>Apellidos</ion-label>
-                            <ion-input required name="lastanme" type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-12>
-                        <ion-item>
-                            <ion-label floating>Email</ion-label>
-                            <ion-input required name="email" type="email"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-12>
-                        <ion-item>
-                            <ion-label floating>Contrasena</ion-label>
-                            <ion-input required name="password" type="password"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-            <div style="margin-top: 15px;">
-                <button ion-button full type="submit">Crear cuenta</button>
-            </div>
-        </form>
-    </ion-card-content>
-</ion-card>
+<ion-content overflow-scroll="true">
+        <div class="top-switcher">
+            <button ion-button full outline color="dark" (click)="isWatcher = !isWatcher">
+                {{ isWatcher? "I'm a provider" : "I'm a watcher" }}
+            </button>
+        </div>
+        <ion-card>
+            <ion-card-content>
+                You're registering as a <b>{{isWatcher? 'watcher':'provider'}}</b>.
+            </ion-card-content>
+        </ion-card>
+        <ion-card class="main-wrapper">
+            <ion-card-title text-center>Crear cuenta</ion-card-title>
+            <ion-card-content *ngIf="isWatcher">
+                <form (ngSubmit)="register($event)">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-6>
+                                <ion-item>
+                                    <ion-label floating>Nombres</ion-label>
+                                    <ion-input required name="name" [(ngModel)]="name" type="text"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-6>
+                                <ion-item>
+                                    <ion-label floating>Apellidos</ion-label>
+                                    <ion-input required name="lastname" [(ngModel)]="lastname" type="text"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input required name="email" [(ngModel)]="email" type="email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Contrasena</ion-label>
+                                    <ion-input required name="password" [(ngModel)]="password" type="password"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <div style="margin-top: 15px;">
+                        <button ion-button full type="submit">Crear cuenta</button>
+                    </div>
+                </form>
+            </ion-card-content>
+            <ion-card-content *ngIf="!isWatcher">
+                <form (ngSubmit)="register($event)">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Nombre proveedor</ion-label>
+                                    <ion-input required name="nameProvider" [(ngModel)]="nameProvider" type="text"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Email</ion-label>
+                                    <ion-input required name="email" [(ngModel)]="email" type="email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Lema</ion-label>
+                                    <ion-input required name="motto" [(ngModel)]="motto" type="text"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Direccion</ion-label>
+                                    <ion-input required name="address" [(ngModel)]="address" type="text"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Numero de contacto</ion-label>
+                                    <ion-input required name="phone" [(ngModel)]="phone" type="text"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Sitio web</ion-label>
+                                    <ion-input required name="website" [(ngModel)]="website" type="text"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                         <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Category</ion-label>
+                                    <ion-select name="category" [(ngModel)]="category">
+                                        <ion-option value="bebidas">Bebidas</ion-option>
+                                        <ion-option value="comidas">Comidas</ion-option>
+                                        <ion-option value="comidas-bebidas">Comidas y bebidas</ion-option>
+                                        <ion-option value="celulares">Celulares</ion-option>
+                                        <ion-option value="acero">Acero</ion-option>
+                                        <ion-option value="madera">Madera</ion-option>
+                                        <ion-option value="artesanales">Artesanales</ion-option>
+                                        <ion-option value="mouses">Mouses</ion-option>
+                                        <ion-option value="cama">Camas</ion-option>
+                                        <ion-option value="muebles">Muebles</ion-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label floating>Contrasena</ion-label>
+                                    <ion-input required name="password" [(ngModel)]="password" type="password"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <h5>Logo <i>(Requerido)</i></h5>
+                                <ion-item>
+                                    <ion-label stacked>Seleccionar imagen</ion-label>
+                                    <ion-input required name="logo" [(ngModel)]="logoUrl" type="file"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <h5>Audio <i>(Opcional)</i></h5>
+                                <ion-item>
+                                    <ion-label stacked>Seleccionar audio</ion-label>
+                                    <ion-input name="audio" [(ngModel)]="audioUrl" type="file"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <h5>Video <i>(Opcional)</i></h5>
+                                <ion-item>
+                                    <ion-label stacked>Seleccionar video</ion-label>
+                                    <ion-input name="video" [(ngModel)]="videoUrl" type="file"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <div style="margin-top: 15px;">
+                        <button ion-button full type="submit">Crear cuenta</button>
+                    </div>
+                </form>
+            </ion-card-content>
+        </ion-card>
+        <div style="padding: 10px; margin-top: 15px;">
+            <a (click)="goToLoginPage()">Volver al inicio de sesion</a>
+        </div>
+    </ion-content>

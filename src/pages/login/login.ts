@@ -1,5 +1,5 @@
 import { Input, Component, Output, OnDestroy, EventEmitter, OnInit, ErrorHandler, ViewChild} from "@angular/core";
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AuthService } from '../../services/auth-service';
 import { Subscription } from "rxjs";
@@ -18,11 +18,14 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
     private loginError: boolean = false;
     private formNotValid: boolean = false;
 
+    private loading: LoadingController;
+
     @ViewChild(NgForm) private form: NgForm;
 
     @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor (private navCtrl: NavController, private authService: AuthService) {}
+    constructor (private navCtrl: NavController, private authService: AuthService,
+        private loadCtrl: LoadingController) {}
 
     ngOnInit() {
         this.authenticated = this.authService.authenticationStream.subscribe(data => {
@@ -31,10 +34,12 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
                 this.loggedIn.emit({ user: this.username, password: this.password});
                 this.navCtrl.setRoot(TabsPage);
                 this.isLoading = false;
+                this.loading.dismiss();
             } else {
                  // Some error
                  this.loginError = true;
                  this.isLoading = false;
+                 this.loading.dismiss();
             }
         });
     }
@@ -57,6 +62,10 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
         console.log(this.form);
         if (this.form.valid) {
             this.isLoading = true;
+            // Loading controller
+            this.loading = this.loadCtrl.create({content: 'Confirmando usuario...'});
+            this.loading.present();
+
             this.formNotValid = false;
             this.authService.login(this.username, this.password);
         }else {

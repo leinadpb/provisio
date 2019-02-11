@@ -12,6 +12,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
+import { DetailPage } from '../pages/detail/detail';
+
 
 // Components
 import { StatusBar } from '@ionic-native/status-bar';
@@ -40,7 +42,8 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     TabsPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    DetailPage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     TabsPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    DetailPage
   ],
   providers: [
     // Ours

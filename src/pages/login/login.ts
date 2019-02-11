@@ -1,5 +1,5 @@
 import { Input, Component, Output, OnDestroy, EventEmitter, OnInit, ErrorHandler, ViewChild} from "@angular/core";
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, Loading } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AuthService } from '../../services/auth-service';
 import { Subscription } from "rxjs";
@@ -18,7 +18,7 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
     private loginError: boolean = false;
     private formNotValid: boolean = false;
 
-    private loading: LoadingController;
+    private loading: Loading;
 
     @ViewChild(NgForm) private form: NgForm;
 

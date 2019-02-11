@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, Loading } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
@@ -31,7 +31,7 @@ export class RegisterPage {
     @Input() private showImgPreview: boolean = false;
 
     private isLoading: boolean = false;
-    private loading: LoadingController;
+    private loading: Loading;
 
     constructor(private navCtrl: NavController, private loadCtrl: LoadingController) {
         

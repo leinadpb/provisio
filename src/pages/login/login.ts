@@ -32,9 +32,9 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
                 this.navCtrl.setRoot(TabsPage);
                 this.isLoading = false;
             } else {
-                 // Some error
-                 this.loginError = true;
-                 this.isLoading = false;
+                // Some error
+                this.loginError = true;
+                this.isLoading = false;
             }
         });
     }

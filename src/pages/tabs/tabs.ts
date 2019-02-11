@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { ProfilePage } from '../profile/profile';
 
@@ -14,7 +13,6 @@ export class TabsPage implements OnInit {
 
   tab1Root = HomePage;
   tab2Root = AboutPage;
-  tab3Root = ContactPage;
   tab4Root = ProfilePage;
 
   @Input() private homeTitle: string;

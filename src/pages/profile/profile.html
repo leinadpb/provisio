@@ -1,42 +1,51 @@
 <ion-header>
     <ion-navbar text-center color="primary">
-        <ion-title>My profile</ion-title>
+        <ion-title>Perfil de Nestlé</ion-title>
     </ion-navbar>
 </ion-header>
-<ion-card style="margin-top: 80px;">
+
+
+<ion-content>
+<ion-card>
     <ion-item>
-        <ion-avatar item-start>
-            <img src="https://s3.amazonaws.com/ionic-io-static/zuk86c6dRsGcPZzkmUy5_jhon-snow.jpg">
+        <ion-avatar item-start >
+            <img src="https://www.marketing4food.com/wp-content/uploads/2018/12/Nestle-Logo-900.jpg">
         </ion-avatar>
-        <h2>Jon Snow</h2>
-        <p>I'm looking for horse saddles</p>
+        <h2>Nestlé</h2>
+        <p>A gusto con la vida</p>
     </ion-item>
 </ion-card>
 
 <ion-content padding>
     <ion-item>
         <p style="font-size:16px;font-style:regular;">
-            <b>Primary User Information</b> <span class="right"> </span>
+            <b>Informacion del Perfíl</b> <span class="right"> </span>
         </p>
     </ion-item>
     <ion-list>
         <ion-item>
-            <ion-label><strong>Name:</strong> Jon Snow</ion-label>
+            <ion-label><strong>Nombre:</strong> Nestlé</ion-label>
         </ion-item>
             <ion-item>
-            <ion-label><strong>Last Name:</strong> Snow</ion-label>
-        </ion-item>
-            <ion-item>
-            <ion-label><strong>E-mail:</strong> gameofthrones@jonsnow.com</ion-label>
+            <ion-label><strong>Descripción:</strong> A gusto con la vida</ion-label>
         </ion-item>
         <ion-item>
-            <ion-label><strong>Country:</strong> Winterfell</ion-label>
+            <ion-label><strong>Tipo de Perfil:</strong> Proveedor</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label><strong>E-mail:</strong> nestle@nestle.com</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label><strong>Sitio Web:</strong> https://www.nestle.do/</ion-label>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="primary" float-left (click)="goToVerProductoPage()">Ver Productos </button>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="danger" (click)="logout()" float-right block>Cerrar Sesión</button>
         </ion-item>
     </ion-list>
-        
-    <ion-card> 
-        <ion-card-content>
-            <button ion-button color="secondary" (click)="logout()">Logout</button>
-        </ion-card-content>
-    </ion-card>
+
+</ion-card>
+
 </ion-content>

@@ -28,19 +28,20 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
         private loadCtrl: LoadingController) {}
 
     ngOnInit() {
+        this.loading = this.loadCtrl.create({content: 'Confirmando usuario...'});
+
         this.authenticated = this.authService.authenticationStream.subscribe(data => {
             if (data.loggedIn && !data.errors) {
                 this.loginError = false;
                 this.loggedIn.emit({ user: this.username, password: this.password});
                 this.navCtrl.setRoot(TabsPage);
                 this.isLoading = false;
-                this.loading.dismiss();
             } else {
                  // Some error
                  this.loginError = true;
-                 this.isLoading = false;
-                 this.loading.dismiss();
+                 this.isLoading = false; 
             }
+            this.loading.dismiss();
         });
     }
 
@@ -50,7 +51,7 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
         }
     }
 
-    handleError(erro: any): void {
+    handleError(errors: any): void {
         this.isLoading = false;
     }
 
@@ -62,8 +63,8 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
         console.log(this.form);
         if (this.form.valid) {
             this.isLoading = true;
+            
             // Loading controller
-            this.loading = this.loadCtrl.create({content: 'Confirmando usuario...'});
             this.loading.present();
 
             this.formNotValid = false;

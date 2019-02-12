@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from '../../services/auth-service';
-import { ProfilePage } from '../profile/profile';
+import { DetailPage } from '../detail/detail';
 
 @Component({
   selector: 'page-home',
@@ -18,8 +18,8 @@ export class HomePage {
   }
 
 
-	private goToProfilePage(): void {
-	    this.navCtrl.push(ProfilePage);
+	private viewDetail(): void {
+	    this.navCtrl.push(DetailPage);
 	}
 
 }

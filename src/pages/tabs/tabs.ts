@@ -3,17 +3,23 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AboutPage } from '../about/about';
 import { HomePage } from '../home/home';
 import { ProfilePage } from '../profile/profile';
+import { AddproductPage } from '../addproduct/addproduct';
 
 import { ConfigService } from '../../services/config-service';
+
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage implements OnInit {
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab4Root = ProfilePage;
+  private homePage = HomePage;
+  private profilePage = ProfilePage;
+  private aboutPage = AboutPage;
+  private addProductPage = AddproductPage;
+
+  private isProvider: boolean = true; // Get this from auth service
+
 
   @Input() private homeTitle: string;
   @Input() private aboutTitle: string;
@@ -31,4 +37,4 @@ export class TabsPage implements OnInit {
       this.contactTitle = data['APP_NAME'];
     });
   }
-}import { AddproductPage } from './../addproduct/addproduct';
+}

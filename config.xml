@@ -19,6 +19,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="YouTubeDataApiKey" value="AIzaSyADhkOVg--7c4mNIAxT0HA6dnUi7F14TNs" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -88,5 +89,11 @@
     <allow-navigation href="http://172.16.0.8:8100" />
     <allow-navigation href="http://10.111.18.73:8100" />
     <allow-navigation href="http://172.16.0.2:8100" />
+    <plugin name="cordova-plugin-youtube-video-player" spec="~2.3.0" />
+    <plugin name="com.moust.cordova.videoplayer" spec="https://github.com/moust/cordova-plugin-videoplayer.git" />
+    <plugin name="cordova-plugin-nativeaudio" spec="~3.0.9" />
+    <plugin name="cordova-plugin-filepath" spec="~1.5.1" />
+    <plugin name="cordova-plugin-streaming-media" spec="~2.2.0" />
     <engine name="android" spec="~7.1.4" />
+    <engine name="browser" spec="~5.0.4" />
 </widget>

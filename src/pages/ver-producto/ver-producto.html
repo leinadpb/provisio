@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar text-center color="primary">
+  <ion-navbar color="primary">
     <ion-title>Productos</ion-title>
   </ion-navbar>
 
@@ -8,5 +8,13 @@
 
 
 <ion-content padding>
-Pagina View de Producto / Servicio
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-avatar item-start>
+        <img [src]="item.url">
+      </ion-avatar>
+      <h2>{{item.title}}</h2>
+      <p>{{item.description}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

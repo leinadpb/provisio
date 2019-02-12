@@ -1,42 +1,66 @@
 <ion-header>
-  <ion-navbar text-center color="primary">
+  <ion-navbar color="primary">
     <ion-title>Detail</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-card style="margin-top: 60px;">
-  <ion-card-content>
-    <p>39 watchers</p>
-  </ion-card-content>
-</ion-card>
+<ion-content>
 
-<ion-card>
-  <ion-item>
-    <img height="64" width="64" src="http://pluspng.com/img-png/nestle-logo-vector-png-posted-605.jpg">
-    <h2><strong>Nestle</strong></h2>
-    <h3>Good Food, Good Life</h3>
-  </ion-item> 
-</ion-card>
+  <ion-card>
+    <ion-row>
+      <ion-col col-7></ion-col>
+      <ion-col col-5 item-end>
+        <b>{{ watchers }}</b> observadores
+      </ion-col>
+    </ion-row>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="http://pluspng.com/img-png/nestle-logo-vector-png-posted-605.jpg">
+        </ion-avatar>
+        <h2>Nestle</h2>
+        <p>Good Food, Good Life</p>
+      </ion-item>
 
-<ion-card>
-    <button ion-button icon-only item-left clear end style="padding-right: 250px">
-    <ion-icon name="logo-youtube"></ion-icon>
-    </button>
-    <button ion-button icon-only item-center clear end style="padding-right: 250px">
-    <ion-icon name="megaphone"></ion-icon>
-    </button>
-    <button ion-button icon-only item-right clear>
-    <ion-icon name="star-outline"></ion-icon>
-    </button>
-</ion-card>
+      <ion-row style="text-align: center;">
+        <ion-col>
+          <button ion-button icon-start clear small (click)="toggleVideo()">
+            <ion-icon isActive="true" name="logo-youtube"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small (click)="toggleAudio()">
+            <ion-icon isActive="false" name="megaphone"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small (click)="toggleWatch()">
+            <ion-icon isActive="true" name="star-outline"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+  </ion-card>
+  
+  <ion-card>
+      <ion-card-header><b>Informacion</b></ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+              <span class="mini-title">Direccion:</span> Av. Source Manhed #61
+          </ion-item>
+          <ion-item>
+              <span class="mini-title">Tel:</span> (829) 988-8135
+          </ion-item>
+          <ion-item>
+              <span class="mini-title">Email:</span> services@nestle.com
+          </ion-item>
+          <ion-item>
+              <span class="mini-title">Categoria:</span> Food & Drink
+          </ion-item>
+          <ion-item>
+              <span class="mini-title">Sitio web:</span> https://nestle.com
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+  </ion-card>
 
-<ion-card>
-    <h2><strong>Information</strong></h2>
-    <p>
-      <strong>Direction:</strong> Av. Source Manhed #61 <br/>
-      <strong>Tel:</strong> (829) 988-8135 <br/>
-      <strong>Email:</strong> services@nestle.com <br/>
-      <strong>Category:</strong> Food & Drink <br/>
-      <strong>Website:</strong> https://nestle.com <br/>
-    </p>
-</ion-card>
+</ion-content>

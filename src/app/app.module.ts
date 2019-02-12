@@ -28,11 +28,17 @@ import { FirebaseService } from '../services/Firebase/FirebaseService';
 
 // Plugins
 import { IonicStorageModule } from '@ionic/storage';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { VideoPlayer } from '@ionic-native/video-player';
+import { FilePath } from '@ionic-native/file-path';
+import { StreamingMedia } from '@ionic-native/streaming-media';
 
 // Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
+
 
 @NgModule({
   declarations: [
@@ -84,6 +90,11 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
 
     // Plugin
     IonicStorageModule,
+    YoutubeVideoPlayer,
+    NativeAudio,
+    FilePath,
+    VideoPlayer,
+    StreamingMedia,
 
     // Firebase
     AngularFireAuth

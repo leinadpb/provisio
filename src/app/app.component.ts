@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, Tabs } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,7 +16,7 @@ import { AuthService } from '../services/auth-service';
 })
 export class MyApp implements OnInit{
 
-  private rootPage: any = LoginPage;
+  private rootPage: any = TabsPage;
   @Input() private isReady: boolean = false;
   private authStream: Subscription;
 

@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth-service';
 import { Subscription } from 'rxjs';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-import { VerProductoPage } from '../ver-producto/ver-producto';
+import { HomePage } from '../home/home';
 import {App} from 'ionic-angular';
 
 @Component({
@@ -37,8 +37,7 @@ export class ProfilePage implements OnInit, OnDestroy {
     }
 
     private goToVerProductoPage(): void {
-        this.navCtrl.push(VerProductoPage);
-        console.log('yendo a ver producto page');
+        this.navCtrl.push(HomePage);
     }
 
 }

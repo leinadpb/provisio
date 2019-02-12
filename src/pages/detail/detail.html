@@ -7,60 +7,56 @@
 <ion-content>
 
   <ion-card>
-    <ion-row>
-      <ion-col col-7></ion-col>
-      <ion-col col-5 item-end>
-        <b>{{ watchers }}</b> observadores
-      </ion-col>
-    </ion-row>
       <ion-item>
         <ion-avatar item-start>
-          <img src="http://pluspng.com/img-png/nestle-logo-vector-png-posted-605.jpg">
+          <img src="https://t-lollevo.es/storage/images/image?remote=https://t-lollevo.es/WebRoot/Store19/Shops/27d37667-4037-48a4-958e-b41f7d1c3b26/5A14/982A/E7FE/6C82/2B1D/0A48/3647/6A77/cereales-special-k-clasicos-kelloggs.jpg&shop=27d37667-4037-48a4-958e-b41f7d1c3b26&width=600">
         </ion-avatar>
-        <h2>Nestle</h2>
-        <p>Good Food, Good Life</p>
+        <h2>Kellogg's Special K Classic</h2>
+        <p>Cereal hecho con hojuelas de maiz acompañado de avena, almendras y arroz</p>
       </ion-item>
 
       <ion-row style="text-align: center;">
         <ion-col>
-          <button ion-button icon-start clear small (click)="toggleVideo()">
+          <button ion-button icon-start clear small (click)="toggleVideo()" color='danger'>
             <ion-icon isActive="true" name="logo-youtube"></ion-icon>
           </button>
         </ion-col>
         <ion-col>
-          <button ion-button icon-start clear small (click)="toggleAudio()">
+          <button ion-button icon-start clear small (click)="toggleAudio()" color='dark'>
             <ion-icon isActive="false" name="megaphone"></ion-icon>
           </button>
         </ion-col>
         <ion-col>
-          <button ion-button icon-start clear small (click)="toggleWatch()">
-            <ion-icon isActive="true" name="star-outline"></ion-icon>
+          <button ion-button icon-start clear small (click)="toggleWatch()" color='light'>
+            <ion-icon isActive="true" name="eye">{{ watchers }}</ion-icon>
           </button>
         </ion-col>
       </ion-row>
   </ion-card>
   
   <ion-card>
-      <ion-card-header><b>Informacion</b></ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-              <span class="mini-title">Direccion:</span> Av. Source Manhed #61
-          </ion-item>
-          <ion-item>
-              <span class="mini-title">Tel:</span> (829) 988-8135
-          </ion-item>
-          <ion-item>
-              <span class="mini-title">Email:</span> services@nestle.com
-          </ion-item>
-          <ion-item>
-              <span class="mini-title">Categoria:</span> Food & Drink
-          </ion-item>
-          <ion-item>
-              <span class="mini-title">Sitio web:</span> https://nestle.com
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
+    <ion-item>
+      <p style="font-size:16px;font-style:regular;">
+          <b>Informacion del Producto</b> <span class="right"> </span>
+      </p>
+    </ion-item>
+    <ion-list>
+        <ion-item>
+            <ion-label><strong>Nombre:</strong> Kellogg's Special K Classic</ion-label>
+        </ion-item>
+            <ion-item>
+            <ion-label><strong>Descripción:</strong> Cereal hecho con hojuelas de maiz acompañado de avena, almendras y arroz</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label><strong>Categoria:</strong> Comidas y Bebidas</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label><strong>Compañia:</strong> Kellogg's</ion-label>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="primary" block (click)="verProductosSimilares()">Productos similares </button>
+        </ion-item>
+    </ion-list>
   </ion-card>
 
 </ion-content>

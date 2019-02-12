@@ -15,6 +15,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { AddproductPage } from '../pages/addproduct/addproduct';
 import { DetailPage } from '../pages/detail/detail';
 import { VerProductoPage } from '../pages/ver-producto/ver-producto';
+import { CreateProductPage } from '../pages/create-product/create-product';
 
 // Components
 import { StatusBar } from '@ionic-native/status-bar';
@@ -52,6 +53,7 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     AddproductPage,
     DetailPage,
     VerProductoPage,
+    CreateProductPage,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +76,7 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     DetailPage,
     AddproductPage,
     VerProductoPage,
+    CreateProductPage,
   ],
   providers: [
     // Ours

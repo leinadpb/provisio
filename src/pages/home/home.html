@@ -1,23 +1,18 @@
 <ion-header>
 
   <ion-navbar text-center color="primary">
-    <ion-title>
-      Provisio
-    </ion-title>
-    
+    <ion-title>Provisio</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-
     <ion-item>
       <ion-icon name="search" item-start></ion-icon>
       <ion-input type="text" value="" placeholder="Buscar Producto o Proveedor"></ion-input>
-
     </ion-item>
-
   </ion-card>
+
   <ion-list>
     <ion-item>
       <ion-card text-wrap>
@@ -29,7 +24,7 @@
           <p align="justify">
             Nació en 1866 en Suiza cuando Henri Nestlé, químico de origen alemán, desarrolló una harina a base de leche y cereales tostados. ... 
           </p>
-          <button ion-button icon-end float-right (click)="viewDetail()">
+          <button ion-button icon-end float-right (click)="viewProfilePage()">
             Ver
             <ion-icon name="eye"></ion-icon>
           </button>
@@ -38,25 +33,7 @@
         </ion-card-content>
       </ion-card>
     </ion-item>
-    <ion-item>
-      <ion-card text-wrap>
-        <img src="https://www.kelloggs.com/content/NorthAmerica/kelloggs/en_US/jcr:content/par/commoncontentroot/headerGrid/par/inuitgrid_1223482637/par/inuitgrid/par/responsiveimage.img.png/1537198398569.png"/>
-        <ion-card-content>
-          <ion-card-title>
-            Kellogg's
-          </ion-card-title>
-          <p align="justify">
-            Kellogg Company es una compañía multinacional agroalimentaria estadounidense. Elabora principalmente alimentos para el desayuno, cereales y galletas. Tiene su sede central en Battle Creek, Míchigan, Estados Unidos.
-          </p>
-          <button ion-button icon-end float-right (click)="viewDetail()">
-            Ver
-            <ion-icon name="eye"></ion-icon>
-          </button>
 
-
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
     <ion-item>
       <ion-card text-wrap>
         <img src="https://t-lollevo.es/storage/images/image?remote=https://t-lollevo.es/WebRoot/Store19/Shops/27d37667-4037-48a4-958e-b41f7d1c3b26/5A14/982A/E7FE/6C82/2B1D/0A48/3647/6A77/cereales-special-k-clasicos-kelloggs.jpg&shop=27d37667-4037-48a4-958e-b41f7d1c3b26&width=600"/>
@@ -74,5 +51,24 @@
         </ion-card-content>
       </ion-card>
     </ion-item>
+
+    <ion-item>
+      <ion-card text-wrap>
+        <img src="https://www.kelloggs.com/content/NorthAmerica/kelloggs/en_US/jcr:content/par/commoncontentroot/headerGrid/par/inuitgrid_1223482637/par/inuitgrid/par/responsiveimage.img.png/1537198398569.png"/>
+        <ion-card-content>
+          <ion-card-title>
+            Kellogg's
+          </ion-card-title>
+          <p align="justify">
+            Kellogg Company es una compañía multinacional agroalimentaria estadounidense. Elabora principalmente alimentos para el desayuno, cereales y galletas. Tiene su sede central en Battle Creek, Míchigan, Estados Unidos.
+          </p>
+          <button ion-button icon-end float-right (click)="viewProfilePage()">
+            Ver
+            <ion-icon name="eye"></ion-icon>
+          </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+
   </ion-list>
 </ion-content>

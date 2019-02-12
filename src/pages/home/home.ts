@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from '../../services/auth-service';
 import { DetailPage } from '../detail/detail';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-home',
@@ -17,9 +18,12 @@ export class HomePage {
     this.isLoggedIn = this.authService.isAuthenticated();
   }
 
-
 	private viewDetail(): void {
 	    this.navCtrl.push(DetailPage);
 	}
+
+  private viewProfilePage(): void {
+      this.navCtrl.push(ProfilePage);
+  }
 
 }

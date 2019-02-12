@@ -4,6 +4,8 @@ import { LoadingController, Loading } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { FilePath } from '@ionic-native/file-path';
 import { StreamingMedia, StreamingAudioOptions, StreamingVideoOptions } from '@ionic-native/streaming-media';
+import { HomePage } from '../home/home';
+import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
   templateUrl: 'detail.html',
@@ -39,7 +41,7 @@ export class DetailPage implements OnInit {
 
   constructor(private youtube: YoutubeVideoPlayer, private loadCtrl: LoadingController,
     private audioPlayer: NativeAudio, private nativePath: FilePath,
-    private streaming: StreamingMedia) { }
+    private streaming: StreamingMedia, public navCtrl: NavController) { }
 
   ngOnInit(): void {
     // this.nativePath.resolveNativePath('../../assets/audio/provisio-sample.mp3')
@@ -76,5 +78,9 @@ export class DetailPage implements OnInit {
 
   private toggleWatch(): void {
     this.watchers = this.watchers + 1;
+  }
+
+  private verProductosSimilares(): void {
+      this.navCtrl.push(HomePage);
   }
 }

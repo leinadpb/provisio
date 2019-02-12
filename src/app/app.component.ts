@@ -16,7 +16,7 @@ import { AuthService } from '../services/auth-service';
 })
 export class MyApp implements OnInit{
 
-  private rootPage: any = TabsPage;
+  private rootPage: any = LoginPage;
   @Input() private isReady: boolean = false;
   private authStream: Subscription;
 

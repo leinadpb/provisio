@@ -7,6 +7,12 @@
 <ion-content>
 
   <ion-card>
+      <ion-row>
+          <ion-col col-7></ion-col>
+          <ion-col col-5 item-end>
+            <b>{{ watchers }}</b> observadores
+          </ion-col>
+        </ion-row>
       <ion-item>
         <ion-avatar item-start>
           <img src="https://t-lollevo.es/storage/images/image?remote=https://t-lollevo.es/WebRoot/Store19/Shops/27d37667-4037-48a4-958e-b41f7d1c3b26/5A14/982A/E7FE/6C82/2B1D/0A48/3647/6A77/cereales-special-k-clasicos-kelloggs.jpg&shop=27d37667-4037-48a4-958e-b41f7d1c3b26&width=600">
@@ -28,7 +34,7 @@
         </ion-col>
         <ion-col>
           <button ion-button icon-start clear small (click)="toggleWatch()" color='light'>
-            <ion-icon isActive="true" name="eye">{{ watchers }}</ion-icon>
+            <ion-icon isActive="true" name="eye"></ion-icon>
           </button>
         </ion-col>
       </ion-row>

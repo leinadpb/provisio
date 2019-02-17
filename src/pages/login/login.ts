@@ -5,6 +5,8 @@ import { AuthService } from '../../services/auth-service';
 import { Subscription } from "rxjs";
 import { NgForm } from '@angular/forms';
 import { RegisterPage } from '../register/register';
+import { FirebaseService } from "../../services/Firebase/FirebaseService";
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Component({
     templateUrl: 'login.html',
@@ -20,12 +22,15 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
 
     private loading: Loading;
 
+    private users$: AngularFireList<any[]>;
+
     @ViewChild(NgForm) private form: NgForm;
 
     @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
 
     constructor (private navCtrl: NavController, private authService: AuthService,
-        private loadCtrl: LoadingController) {}
+        private loadCtrl: LoadingController, private fireService: FirebaseService,
+        private db: AngularFireDatabase) {}
 
     ngOnInit() {
         this.loading = this.loadCtrl.create({content: 'Confirmando usuario...'});
@@ -43,6 +48,8 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
             }
             this.loading.dismiss();
         });
+
+        this.users$ = this.db.list('/users');
     }
 
     ngOnDestroy() {
@@ -61,6 +68,7 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
 
     private login(form: any) {
         console.log(this.form);
+        
         if (this.form.valid) {
             this.isLoading = true;
             

@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { RegisterPage } from '../register/register';
 import { FirebaseService } from "../../services/Firebase/FirebaseService";
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { UserInfoService } from "../../services/user-info";
 
 @Component({
     templateUrl: 'login.html',
@@ -30,7 +31,7 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
 
     constructor (private navCtrl: NavController, private authService: AuthService,
         private loadCtrl: LoadingController, private fireService: FirebaseService,
-        private db: AngularFireDatabase) {}
+        private db: AngularFireDatabase, private userInfo: UserInfoService) {}
 
     ngOnInit() {
         this.loading = this.loadCtrl.create({content: 'Confirmando usuario...'});
@@ -38,6 +39,13 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
         this.authenticated = this.authService.authenticationStream.subscribe(data => {
             if (data.loggedIn && !data.errors) {
                 this.loginError = false;
+                
+                // Get User Data
+                // TODO...
+                
+                // Update User Info Service
+                // TODO...
+
                 this.loggedIn.emit({ user: this.username, password: this.password});
                 this.navCtrl.setRoot(TabsPage);
                 this.isLoading = false;

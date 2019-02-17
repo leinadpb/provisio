@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { FirebaseService } from '../../services/Firebase/FirebaseService';
 import { UploadFileService } from '../../services/upload-file';
+import { UserInfoService } from '../../services/user-info';
 
 @Component({
     templateUrl: 'register.html'
@@ -57,7 +58,8 @@ export class RegisterPage implements OnInit {
 
     constructor(private navCtrl: NavController, private loadCtrl: LoadingController,
         private authService: AuthService, private db: AngularFireDatabase,
-        private fireService: FirebaseService, private uploadService: UploadFileService) {
+        private fireService: FirebaseService, private uploadService: UploadFileService,
+        private userInfo: UserInfoService) {
         
     }
 
@@ -69,7 +71,9 @@ export class RegisterPage implements OnInit {
                 this.loading.dismiss();
             } else {
                 this.errorUserExists = true;
-                this.loading.dismiss();
+                if (!!this.loading) {
+                    this.loading.dismiss();
+                }
             }
         });
 
@@ -116,6 +120,8 @@ export class RegisterPage implements OnInit {
                 this.users$.push(user);
                 this.authService.register(user);
 
+                this.userInfo.addWatcher(user);
+
             } else {
                 console.log('Form not valid');
             }
@@ -145,6 +151,9 @@ export class RegisterPage implements OnInit {
                 }
                 this.users$.push(user);
                 this.authService.register(user);
+
+                this.userInfo.addProvider(user);
+
             }else {
                 console.log('Form not valid');
             }

@@ -27,6 +27,7 @@ import { SqliteDatabaseService } from '../services/sqlite-database-service';
 import { ConfigService } from '../services/config-service';
 import { FirebaseService } from '../services/Firebase/FirebaseService';
 import { UploadFileService } from '../services/upload-file/UploadFileService';
+import { UserInfoService } from '../services/user-info/UserInfoService';
 
 // Plugins
 import { IonicStorageModule } from '@ionic/storage';
@@ -89,6 +90,7 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     SqliteDatabaseService,
     FirebaseService,
     UploadFileService,
+    UserInfoService,
 
     // Ionic
     StatusBar,

@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { SqliteDatabaseService } from '../sqlite-database-service';
 import 'rxjs/add/observable/of';
 import { FirebaseService } from '../Firebase/FirebaseService';
+import { Watcher } from '../models';
+import { AngularFireList } from 'angularfire2/database';
 
 @Injectable()
 export class AuthService {
@@ -9,6 +11,7 @@ export class AuthService {
     private isAuth: boolean;
     private userEmail: string;
     public authenticationStream: EventEmitter<any> = new EventEmitter<any>();
+    public registerStream: EventEmitter<any> = new EventEmitter<any>();
     
     constructor(private db: SqliteDatabaseService, private auth: FirebaseService) {
    
@@ -57,6 +60,27 @@ export class AuthService {
 
     getUserEmail(): string {
         return this.userEmail;
+    }
+
+    getUsers(): AngularFireList<any> {
+        return this.auth.readAllUsers();
+    }
+
+    exists(email: string): any {
+        this.auth.existsPromise(email);
+    }
+
+    register(user: any) {
+        this.auth.register(user.email, user.password).then(data => {
+            this.registerStream.emit({
+                success: true,
+            });
+        }).catch(err => {
+            this.registerStream.emit({
+                success: false,
+                message: err.message
+            });
+        });
     }
   
 }

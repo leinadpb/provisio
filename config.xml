@@ -94,6 +94,9 @@
     <plugin name="cordova-plugin-nativeaudio" spec="~3.0.9" />
     <plugin name="cordova-plugin-filepath" spec="~1.5.1" />
     <plugin name="cordova-plugin-streaming-media" spec="~2.2.0" />
+    <plugin name="cordova-plugin-camera" spec="~4.0.3" />
+    <plugin name="cordova-plugin-file" spec="~6.0.1" />
+    <allow-navigation href="http://10.0.0.11:8100" />
     <engine name="android" spec="~7.1.4" />
     <engine name="browser" spec="~5.0.4" />
 </widget>

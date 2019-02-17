@@ -26,6 +26,7 @@ import { AuthService } from '../services/auth-service';
 import { SqliteDatabaseService } from '../services/sqlite-database-service';
 import { ConfigService } from '../services/config-service';
 import { FirebaseService } from '../services/Firebase/FirebaseService';
+import { UploadFileService } from '../services/upload-file/UploadFileService';
 
 // Plugins
 import { IonicStorageModule } from '@ionic/storage';
@@ -34,10 +35,13 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { VideoPlayer } from '@ionic-native/video-player';
 import { FilePath } from '@ionic-native/file-path';
 import { StreamingMedia } from '@ionic-native/streaming-media';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
 
 // Firebase
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, FirebaseDatabase } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
 
 
@@ -84,6 +88,7 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     AuthService,
     SqliteDatabaseService,
     FirebaseService,
+    UploadFileService,
 
     // Ionic
     StatusBar,
@@ -98,9 +103,12 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     FilePath,
     VideoPlayer,
     StreamingMedia,
+    Camera,
+    File,
 
     // Firebase
-    AngularFireAuth
+    AngularFireAuth,
+    AngularFireDatabase,
   ]
 })
 export class AppModule {}

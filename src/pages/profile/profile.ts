@@ -5,6 +5,7 @@ import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { HomePage } from '../home/home';
 import {App} from 'ionic-angular';
+import { UserInfoService } from '../../services/user-info/UserInfoService';
 
 @Component({
     templateUrl: 'profile.html'
@@ -12,8 +13,10 @@ import {App} from 'ionic-angular';
 export class ProfilePage implements OnInit, OnDestroy {
 
     private loggedOut: Subscription;
+    private userName: string;
 
-    constructor(private app: App, private auth: AuthService, public navCtrl: NavController) {}
+    constructor(private app: App, private auth: AuthService, public navCtrl: NavController,
+        private userInfo: UserInfoService) {}
 
     ngOnInit(): void {
         this.loggedOut = this.auth.authenticationStream.subscribe(data => {
@@ -23,6 +26,8 @@ export class ProfilePage implements OnInit, OnDestroy {
                 this.app.getRootNav().setRoot(LoginPage);
             }
         });
+
+        this.userName = this.userInfo.name;
 
     }
 

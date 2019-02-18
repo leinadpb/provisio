@@ -25,6 +25,8 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
 
     private users$: AngularFireList<any[]>;
 
+    private registeredUsers: Array<any>;
+
     @ViewChild(NgForm) private form: NgForm;
 
     @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
@@ -36,18 +38,28 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
     ngOnInit() {
         this.loading = this.loadCtrl.create({content: 'Confirmando usuario...'});
 
+        this.users$ = this.db.list('/users');
+
         this.authenticated = this.authService.authenticationStream.subscribe(data => {
             if (data.loggedIn && !data.errors) {
                 this.loginError = false;
                 
                 // Get User Data
-                // TODO...
                 
-                // Update User Info Service
-                // TODO...
+                let loggedInUser = this.registeredUsers.filter(u => u.email === this.username)[0];
+                //console.log(loggedInUser);
 
-                this.loggedIn.emit({ user: this.username, password: this.password});
-                this.navCtrl.setRoot(TabsPage);
+                if (!!loggedInUser) {
+                    if (loggedInUser.userType === 'WATCHER') {
+                        this.userInfo.addWatcher(loggedInUser);
+                    } else {
+                        this.userInfo.addProvider(loggedInUser);
+                    }
+                    this.loggedIn.emit({ user: this.username, password: this.password});
+                    this.navCtrl.setRoot(TabsPage);
+                } else {
+                    console.log('User not found');
+                }
                 this.isLoading = false;
             } else {
                  // Some error
@@ -58,6 +70,11 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
         });
 
         this.users$ = this.db.list('/users');
+
+        this.users$.valueChanges().subscribe(data => {
+            console.log(data);
+            this.registeredUsers = data;
+        }, err => console.log(err));
     }
 
     ngOnDestroy() {
@@ -74,7 +91,7 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
         this.navCtrl.push(RegisterPage);
     }
 
-    private login(form: any) {
+    private async login(form: any) {
         console.log(this.form);
         
         if (this.form.valid) {

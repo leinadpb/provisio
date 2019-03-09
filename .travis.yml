@@ -18,6 +18,7 @@ before_script:
  - sudo dpkg -i google-chrome*.deb
 
 script: 
+  - npm install -g angular-cli
   - ng test --watch false -cc
   - npm run e2e
   - ng build -bh "https://ahsanayaz.github.io/ng-traffic-ci/"

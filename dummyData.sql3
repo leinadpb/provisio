@@ -1,0 +1,70 @@
+-- CREATE TABLE PRODUCTS
+CREATE TABLE IF NOT EXISTS products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_url TEXT NOT NULL,
+    created_at DATETIME NOT NULL,
+    last_modified DATETIME NOT NULL,
+    user_email VARCHAR(255) NOT NULL
+);
+
+-- CREATE TABLE CATEGORIES
+CREATE TABLE IF NOT EXISTS categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(80) NOT NULL,
+    description TEXT,
+    created_at DATETIME NOT NULL,
+    last_modified DATETIME NOT NULL
+);
+
+-- CRATE TABLE FOR TESTING
+CREATE TABLE IF NOT EXISTS items (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(80) NOT NULL,
+    description TEXT,
+    created_at DATETIME NOT NULL,
+    last_modified DATETIME NOT NULL
+);
+
+-- INSERT SOME PRODUCTS
+INSERT INTO products (name, description, image_url, created_at, last_modified, user_email)
+VALUES ('Mouse inalambrico', 'Lleva contigo el mouse donde quieras, no te limites.', 'https://images-na.ssl-images-amazon.com/images/I/411jXtQp3jL._SX425_.jpg',
+datetime('now'), datetime('now'), 'test@provider.com');
+
+INSERT INTO products (name, description, image_url, created_at, last_modified, user_email)
+VALUES ('Corn Flakes', 'Nunca antes habias probado un corn flakes como este.', 'http://images.kglobalservices.com/www.kelloggs.in/en_in/product/product_2501740/prod_img-2501784_in___kelloggs-corn-flakes-original--the-best.png',
+datetime('now'), datetime('now'), 'test@provider.com');
+
+INSERT INTO products (name, description, image_url, created_at, last_modified, user_email)
+VALUES ('Salon de eventos', 'Las mejores fiestas no son las mas organizadas, pero si la mejor organizada.', 'https://quinceanerainhouston.houstonquinceanera.com/sites/default/files/attach2/reception_halls_houston_2018.jpg',
+datetime('now'), datetime('now'), 'test2@provider.com');
+
+INSERT INTO products (name, description, image_url, created_at, last_modified, user_email)
+VALUES ('Postres', 'Los mejores postres lo creamos aqui!', 'https://www.hogarmania.com/archivos/201709/postres-cafe-recetas-416x236x80xX.jpg',
+datetime('now'), datetime('now'), 'test2@provider.com');
+
+
+-- INSERT SOME CATEGORIES
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Decoraciones', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Transporte', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Deportes', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Comidas', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Bebidas', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Comidas y bebidas', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Eventos', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Relojs', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Postres', '', datetime('now'), datetime('now'));
+INSERT INTO categories (name, description, created_at, last_modified)
+VALUES ('Inmobiliario', '', datetime('now'), datetime('now'));
+
+

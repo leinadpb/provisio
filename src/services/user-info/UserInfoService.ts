@@ -45,7 +45,7 @@ export class UserInfoService {
         this.email = user.email;
         this.watchers = user.watcher;
         this.imageUrl = user.imageUrl;
-        this.type = user.type;
+        this.type = user.userType;
     }
 
     addProvider(user: any) {
@@ -60,7 +60,7 @@ export class UserInfoService {
         this.phone = user.phone;
         this.address = user.address;
         this.watchingCount = user.watchingCount;
-        this.type = user.type;
+        this.type = user.userType;
     }
 
     addUser(email, name) {

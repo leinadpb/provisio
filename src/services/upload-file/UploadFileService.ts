@@ -23,12 +23,16 @@ export class UploadFileService implements OnInit {
     // firebase.initializeApp({});
   }
 
+  getDownloadUrl(fullPath: any): any {
+    return firebase.storage().ref(fullPath).getDownloadURL();
+  }
+
   async pickImage() {
     const options: CameraOptions = {
       quality: 68,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.ALLMEDIA
     };
 
     try {

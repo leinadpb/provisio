@@ -38,6 +38,9 @@ import { FilePath } from '@ionic-native/file-path';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
+import { SQLite } from '@ionic-native/sqlite';
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 // Firebase
 import { AngularFireModule, FirebaseDatabase } from 'angularfire2';
@@ -99,7 +102,8 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
 
     // Plugin
-    IonicStorageModule,
+    SQLite,
+    SQLitePorter,
     YoutubeVideoPlayer,
     NativeAudio,
     FilePath,
@@ -107,6 +111,7 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     StreamingMedia,
     Camera,
     File,
+    ImagePicker,
 
     // Firebase
     AngularFireAuth,

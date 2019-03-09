@@ -1,9 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { SqliteDatabaseService } from '../sqlite-database-service';
-import 'rxjs/add/observable/of';
 import { FirebaseService } from '../Firebase/FirebaseService';
-import { Watcher } from '../models';
-import { AngularFireList } from 'angularfire2/database';
 
 @Injectable()
 export class AuthService {
@@ -62,9 +59,9 @@ export class AuthService {
         return this.userEmail;
     }
 
-    getUsers(): AngularFireList<any> {
-        return this.auth.readAllUsers();
-    }
+    // getUsers(): AngularFireList<any> {
+    //     //return this.auth.readAllUsers();
+    // }
 
     exists(email: string): any {
         this.auth.existsPromise(email);

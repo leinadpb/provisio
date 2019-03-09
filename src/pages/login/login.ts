@@ -65,6 +65,7 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
                  // Some error
                  this.loginError = true;
                  this.isLoading = false; 
+                 console.log(data.errors);
             }
             this.loading.dismiss();
         });

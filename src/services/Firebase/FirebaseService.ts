@@ -1,8 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { Product, Watcher, Provider } from '../models';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable()
 export class FirebaseService implements OnInit{
@@ -28,8 +27,8 @@ export class FirebaseService implements OnInit{
         return this.auth.auth.signOut();
     }
 
-    readAllUsers(): AngularFireList<any[]> {
-        return this.users$;
+    readAllUsers(): Observable<any> {
+        return this.db.list("/users").valueChanges();
     }
 
     register(email, password) {

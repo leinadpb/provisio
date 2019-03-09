@@ -1,5 +1,10 @@
 <ion-tabs>
 	<ion-tab [root]="homePage" [tabTitle]="'Inicio'" tabIcon="home"></ion-tab>
+  <ion-tab [root]="profilePage" [tabTitle]="'Mi Perfil'" tabIcon="person"></ion-tab>
+  <ion-tab [root]="aboutPage" [tabTitle]="'Acerca de'" tabIcon="information-circle"></ion-tab>
+</ion-tabs>
+<ion-tabs *ngIf="isProvider">
+	<ion-tab [root]="homePage" [tabTitle]="'Inicio'" tabIcon="home"></ion-tab>
 	<ion-tab [root]="addProductPage" [tabTitle]="'Productos'" tabIcon="add-circle"></ion-tab>
   <ion-tab [root]="profilePage" [tabTitle]="'Mi Perfil'" tabIcon="person"></ion-tab>
   <ion-tab [root]="aboutPage" [tabTitle]="'Acerca de'" tabIcon="information-circle"></ion-tab>

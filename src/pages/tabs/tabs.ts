@@ -6,7 +6,7 @@ import { ProfilePage } from '../profile/profile';
 import { AddproductPage } from '../addproduct/addproduct';
 
 import { ConfigService } from '../../services/config-service';
-
+import { UserInfoService } from '../../services/user-info/UserInfoService';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -26,8 +26,14 @@ export class TabsPage implements OnInit {
   @Input() private contactTitle: string;
   @Input() private profileTitle: string;
 
-  constructor(private configs: ConfigService) {
-
+  constructor(private configs: ConfigService, private user: UserInfoService) {
+    if (user.type === 'WATCHER') {
+      this.isProvider = false;
+    }else {
+      this.isProvider = true;
+    }
+    console.log(user);
+    console.log(`USER TYPE IS: ${user.type}`);
   }
 
   ngOnInit(): void {

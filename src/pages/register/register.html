@@ -135,9 +135,11 @@
                             <ion-col col-12>
                                 <h5>Logo <i>(Requerido) </i><span *ngIf="progress > 0">{{ progress | number:'3.0-2' }}%</span></h5>
                                 <button ion-button type="button" (click)="selectLogo()">Select image</button>
+                                <p *ngIf="!!uploadedImageUrl">{{ uploadedImageUrl }}</p>
+                                <img *ngIf="!!uploadedImageUrl" [src]="uploadedImageUrl" width="15px" height="15px" />
                             </ion-col>
                         </ion-row>
-                        <ion-row>
+                        <!-- <ion-row>
                             <ion-col col-12>
                                 <h5>Audio <i>(Opcional)</i></h5>
                                 <ion-item>
@@ -154,7 +156,7 @@
                                     <ion-input name="video" [(ngModel)]="videoUrl" type="file"></ion-input>
                                 </ion-item>
                             </ion-col>
-                        </ion-row>
+                        </ion-row> -->
                     </ion-grid>
                     <span *ngIf="errorUserExists" style="color: red;">
                         Ya existe un usuario con este correo.

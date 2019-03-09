@@ -33,7 +33,6 @@ import { UserInfoService } from '../services/user-info/UserInfoService';
 import { IonicStorageModule } from '@ionic/storage';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
-import { VideoPlayer } from '@ionic-native/video-player';
 import { FilePath } from '@ionic-native/file-path';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { Camera } from '@ionic-native/camera';
@@ -107,7 +106,6 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
     YoutubeVideoPlayer,
     NativeAudio,
     FilePath,
-    VideoPlayer,
     StreamingMedia,
     Camera,
     File,

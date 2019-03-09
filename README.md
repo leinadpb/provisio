@@ -1,3 +1,5 @@
+#### Provisio builds
+[![Build Status](https://travis-ci.org/leinadpb/provisio.svg?branch=master)](https://travis-ci.org/leinadpb/provisio)
 
 # Provisio
 <img src="https://raw.githubusercontent.com/leinadpb/provisio/master/src/assets/imgs/logo.png" width="100px" height="auto">

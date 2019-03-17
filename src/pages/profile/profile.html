@@ -8,11 +8,11 @@
 <ion-content>
     <ion-card>
         <ion-item>
-            <ion-avatar item-start >
-                <img src="https://www.marketing4food.com/wp-content/uploads/2018/12/Nestle-Logo-900.jpg">
+            <ion-avatar item-start *ngIf="userInfo.type === 'PROVIDER'">
+                <img [src]="userInfo.logoUrl">
             </ion-avatar>
-            <h2>{{ userName }}</h2>
-            <p>A gusto con la vida</p>
+            <h2>{{ userName }} {{ (userInfo.type === 'WATCHER')? userInfo.lastname : '' }}</h2>
+            <p>{{ (userInfo.type === 'PROVIDER')? userInfo.motto : ''  }}</p>
         </ion-item>
     </ion-card>
 
@@ -24,25 +24,25 @@
         </ion-item>
         <ion-list>
             <ion-item>
-                <ion-label><strong>Nombre:</strong> Nestlé</ion-label>
+                <ion-label><strong>Nombre:</strong> {{ userInfo.name }}</ion-label>
             </ion-item>
-                <ion-item>
-                <ion-label><strong>Descripción:</strong> A gusto con la vida</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label><strong>Tipo de Perfil:</strong> Proveedor</ion-label>
+            <ion-item *ngIf="userInfo.type == 'PROVIDER'">
+                <ion-label><strong>Descripción:</strong> {{ userInfo.motto }}</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label><strong>E-mail:</strong> nestle@nestle.com</ion-label>
+                <ion-label><strong>Tipo de Perfil:</strong> {{ userInfo.type }}</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label><strong>Sitio Web:</strong> https://www.nestle.do/</ion-label>
+                <ion-label><strong>E-mail:</strong> {{ userInfo.email }}</ion-label>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="userInfo.type == 'PROVIDER'">
+                <ion-label><strong>Sitio Web:</strong> {{ userInfo.website }}</ion-label>
+            </ion-item>
+            <ion-item *ngIf="userInfo.type == 'PROVIDER'">
                 <button ion-button color="primary" float-left (click)="goToVerProductoPage()">Ver Productos </button>
             </ion-item>
             <ion-item>
-                <button ion-button color="danger" (click)="logout()" float-right block>Cerrar Sesión</button>
+                <button ion-button full color="dark" (click)="logout()">Cerrar sesion</button>
             </ion-item>
         </ion-list>
     </ion-content>

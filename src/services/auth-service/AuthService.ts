@@ -67,7 +67,7 @@ export class AuthService {
         this.auth.existsPromise(email);
     }
 
-    register(user: any) {
+    register(user: any, addedKey?: any) {
         this.auth.register(user.email, user.password).then(data => {
             this.registerStream.emit({
                 success: true,

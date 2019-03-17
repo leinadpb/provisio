@@ -31,6 +31,79 @@ export class FirebaseService implements OnInit{
         return this.db.list("/users").valueChanges();
     }
 
+    removeProviderFromUserWatchersList(watcherEmail, providerEmail, watcherDocId, providerDocId) {
+        console.log('Will remove from wacher list >>>> ');
+        console.log(watcherEmail, providerEmail, watcherDocId, providerDocId);
+        let user = this.db.object(`/users/${watcherDocId}`);
+        let provider = this.db.object(`/users/${providerDocId}`);
+        // GET curretn watchers list
+        let currentWatchers = [];
+        let providerCurrentWatchers = [];
+        let userCurrentWatchersFetched: boolean = false;
+        let providerCurrentWatchersFetched: boolean = false;
+
+        user.valueChanges().subscribe((data: any) => {
+            currentWatchers = (!!data.watchers)? data.watchers : [];
+            if (!userCurrentWatchersFetched) {
+                currentWatchers = currentWatchers.filter(x => x !== providerEmail);
+                user.update({
+                    watchers: [...currentWatchers]
+                });
+            }
+            userCurrentWatchersFetched = true;
+        });
+        provider.valueChanges().subscribe((data: any) => {
+            providerCurrentWatchers = (!!data.watchers)? data.watchers : [];
+            if (!providerCurrentWatchersFetched) {
+                providerCurrentWatchers = providerCurrentWatchers.filter(x => x !== watcherEmail);
+                provider.update({
+                    watchers: [...providerCurrentWatchers]
+                });
+            }
+            providerCurrentWatchersFetched = true;
+        });
+    }
+
+    addProviderToUserWatchersList(watcherEmail, providerEmail, watcherDocId, providerDocId) {
+        let user = this.db.object(`/users/${watcherDocId}`);
+        let provider = this.db.object(`/users/${providerDocId}`);
+        
+        // GET current watchers list
+        let userCurrentWatchers = [];
+        let providerCurrentWatchers = [];
+        let userCurrentWatchersFetched: boolean = false;
+        let providerCurrentWatchersFetched: boolean = false;
+
+        user.valueChanges().subscribe((data: any) => {
+            userCurrentWatchers = (!!data.watchers)? data.watchers : [];
+            console.log('After values changes: ');
+            console.log(data);
+            if (!userCurrentWatchersFetched) {
+                user.update({
+                    watchers: [...userCurrentWatchers, providerEmail]
+                });
+            }
+            userCurrentWatchersFetched = true;
+        });
+
+        provider.valueChanges().subscribe((data: any) => {
+            providerCurrentWatchers = (!!data.watchers)? data.watchers : [];
+            console.log('After values changes: ');
+            console.log(data);
+            if (!providerCurrentWatchersFetched) {
+                provider.update({
+                    watchers: [...providerCurrentWatchers, watcherEmail]
+                });
+            }
+            providerCurrentWatchersFetched = true;
+        });      
+    
+    }
+
+    createPushId() {
+        return this.db.createPushId();
+    }
+
     register(email, password) {
         return this.auth.auth.createUserWithEmailAndPassword(email, password);
     }

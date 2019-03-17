@@ -6,7 +6,8 @@ import { FilePath } from '@ionic-native/file-path';
 import { StreamingMedia, StreamingAudioOptions, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { HomePage } from '../home/home';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { UserInfoService } from '../../services/user-info/UserInfoService';
+import { FirebaseService } from '../../services/Firebase/FirebaseService';
 @Component({
   templateUrl: 'detail.html',
 })
@@ -16,6 +17,12 @@ export class DetailPage implements OnInit {
   private starSelected: boolean = false;
   @Input() private watchers: number = 0;
 
+  private selectedProviderEmail: string;
+  private provider: any = {};
+  private providerWatchers: any[] = [];
+
+  private currentUserIsWatchingViewingProvider: boolean = false;
+
   private loading: Loading;
 
   private options: StreamingVideoOptions = {
@@ -24,6 +31,10 @@ export class DetailPage implements OnInit {
     orientation: 'landscape',
     controls: true
   };
+
+  private fetchingProviderInfo: Loading = this.loadCtrl.create({
+    content: 'Obteniendo informacion del proveedor...'
+  });
 
   private optionsAudio: StreamingAudioOptions = {
     bgColor: "#FFFFFF",
@@ -41,19 +52,50 @@ export class DetailPage implements OnInit {
 
   constructor(private youtube: YoutubeVideoPlayer, private loadCtrl: LoadingController,
     private audioPlayer: NativeAudio, private nativePath: FilePath,
-    private streaming: StreamingMedia, public navCtrl: NavController) { }
+    private streaming: StreamingMedia, public navCtrl: NavController,
+    private userInfo: UserInfoService, private navParams: NavParams,
+    private firebase: FirebaseService) { }
 
   ngOnInit(): void {
-    // this.nativePath.resolveNativePath('../../assets/audio/provisio-sample.mp3')
-    //   .then(filePath => {
-    //     this.audioPlayer.preloadSimple('uniqueId1', filePath);
-    //   })
-    //   .catch(err => console.log(err));
-
+    this.selectedProviderEmail = this.navParams.get('email');
+    this.getInfo(this.selectedProviderEmail);
 
     this.loading = this.loadCtrl.create({
       content: 'Cargando video...'
     });
+  }
+
+  getInfo(email: string, withoutLoading: boolean = false) {
+    
+    if(!withoutLoading) this.fetchingProviderInfo.present();
+
+    this.updateUser(email);
+    
+    if(!withoutLoading) this.fetchingProviderInfo.dismiss();
+  }
+
+  updateUser(email: string) {
+    this.firebase.readAllUsers().subscribe((data: any[]) => {
+      this.provider = data.filter(x => x.userType === 'PROVIDER' && x.email === email)[0];
+      console.log('Provider fetched: ');
+      console.log(this.provider);
+      this.providerWatchers = (!!this.provider.watchers)? this.provider.watchers: [];
+      if (this.providerWatchers.length > 0) {
+        this.ifCurrentUserIsWatchingViewingProvider(this.providerWatchers);
+      } else {
+        this.currentUserIsWatchingViewingProvider = false;
+      }
+    });
+  }
+
+  ifCurrentUserIsWatchingViewingProvider(watchers: any[]) {
+    console.log('Before verifying if current user is watchnig provider....');
+    console.log(watchers);
+    console.log(this.userInfo.email);
+    let value = watchers.filter(x => x === this.userInfo.email)[0];
+    console.log(value);
+    if (!!value) this.currentUserIsWatchingViewingProvider = true;
+    else this.currentUserIsWatchingViewingProvider = false;
   }
 
   private toggleAudio(): void {
@@ -76,8 +118,27 @@ export class DetailPage implements OnInit {
     }, 2000);
   }
 
-  private toggleWatch(): void {
-    this.watchers = this.watchers + 1;
+  private startWatching(): void {
+    // Get watcher email
+    let watcherEmail = this.userInfo.email;
+    // Get viewing provider email
+    let providerEmail = this.provider.email;
+    // Add provider email to array of "Watchers" of current user in firebase DB.
+    this.firebase.addProviderToUserWatchersList(watcherEmail, providerEmail, this.userInfo.docId, this.provider.docId);
+
+    this.updateUser(providerEmail);
+  }
+
+  private stopWatching(): void {
+    // Get watcher email
+    let watcherEmail = this.userInfo.email;
+     // Get viewing provider email
+     let providerEmail = this.provider.email;
+     // Add provider email to array of "Watchers" of current user in firebase DB.
+     this.firebase.removeProviderFromUserWatchersList(watcherEmail, providerEmail, this.userInfo.docId, this.provider.docId);
+
+     this.currentUserIsWatchingViewingProvider = false;
+     this.updateUser(providerEmail);
   }
 
   private verProductosSimilares(): void {

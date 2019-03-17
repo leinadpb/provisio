@@ -7,7 +7,8 @@ export class UserInfoService {
     @Input() name: string;
     @Input() type: string;
     @Input() email: string;
-    @Input() watchers: Array<any>;
+    @Input() watchers: any[];
+    @Input() docId: any;
     
     // watcher
     @Input() lastname: string;
@@ -21,6 +22,7 @@ export class UserInfoService {
     @Input() audioUrl: string;
     @Input() logoUrl: string;
     @Input() watchingCount: number;
+    @Input() website: string;
 
     reset() {
         this.name = "";
@@ -36,31 +38,35 @@ export class UserInfoService {
         this.audioUrl = "";
         this.logoUrl = "";
         this.watchingCount = 0;
+        this.website = '';
     }
 
-    addWatcher(user: any) {
+    addWatcher(user: any, addedKey?: any) {
         this.reset();
+        this.docId = !!user.docId? user.docId : addedKey;
         this.name = user.name;
         this.lastname = user.lastname;
         this.email = user.email;
-        this.watchers = user.watcher;
+        this.watchers = user.watchers;
         this.imageUrl = user.imageUrl;
         this.type = user.userType;
     }
 
-    addProvider(user: any) {
+    addProvider(user: any, addedKey?: any) {
         this.reset();
+        this.docId = !!user.docId? user.docId : addedKey;
         this.name = user.name;
         this.motto = user.motto;
         this.email = user.email;
         this.watchers = user.watchers;
         this.audioUrl = user.audioUrl;
-        this.logoUrl = user.logoUrl;
+        this.logoUrl = user.profileImageUrl;
         this.videoUrl = user.videoUrl;
         this.phone = user.phone;
         this.address = user.address;
         this.watchingCount = user.watchingCount;
         this.type = user.userType;
+        this.website = user.website;
     }
 
     addUser(email, name) {

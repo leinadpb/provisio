@@ -101,6 +101,6 @@
     <plugin name="cordova-plugin-telerik-imagepicker" spec="2.2.4">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Provisio needs permissions in order to let you upload a picture from your cellphone." />
     </plugin>
-    <engine name="android" spec="~7.1.4" />
     <engine name="browser" spec="~5.0.4" />
+    <engine name="android" spec="^7.1.4" />
 </widget>

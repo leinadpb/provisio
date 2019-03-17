@@ -32,16 +32,18 @@ export class UploadFileService implements OnInit {
       quality: 68,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.ALLMEDIA
+      mediaType: this.camera.MediaType.ALLMEDIA,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     };
 
     try {
+      console.log('PICKING IMAGE DEBUG>>>>');
       let cameraInfo = await this.camera.getPicture(options);
-      //alert('File choose');
-      let blobInfo = await this.makeFileIntoBlob(cameraInfo);
-      //alert('Blob created')
+      console.log(cameraInfo);
+      let blobInfo = await this.makeFileIntoBlob('file://' + cameraInfo);
+      console.log(blobInfo);
       let uploadInfo: any = await this.uploadToFirebase(blobInfo);
-      //alert('File uploaded');
+      console.log(uploadInfo);
 
       this.fileStream.emit({
           uploadInfo: uploadInfo,
@@ -68,8 +70,8 @@ export class UploadFileService implements OnInit {
 
           // get the path..
           let path = nativeURL.substring(0, nativeURL.lastIndexOf("/"));
-          console.log("path", path);
-          console.log("fileName", name);
+          console.log("path: ", path);
+          console.log("fileName: ", name);
 
           fileName = name;
 

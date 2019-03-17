@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, LoadingController, Loading, ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
 import { AuthService } from '../../services/auth-service';
@@ -7,6 +7,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Subscription } from 'rxjs';
 import { UploadFileService } from '../../services/upload-file';
 import { UserInfoService } from '../../services/user-info';
+import { FirebaseService } from '../../services/Firebase/FirebaseService';
 @Component({
     templateUrl: 'register.html'
 })
@@ -52,11 +53,12 @@ export class RegisterPage implements OnInit {
     private uploadInfo: any;
 
     private disabledCreate: boolean = false;
+    private imageHasBeenUploaded: boolean = false;
 
     constructor(private navCtrl: NavController, private loadCtrl: LoadingController,
         private authService: AuthService, private db: AngularFireDatabase,
-        private uploadService: UploadFileService,
-        private userInfo: UserInfoService) {
+        private uploadService: UploadFileService, private fireService: FirebaseService,
+        private userInfo: UserInfoService, private toastCtrl: ToastController) {
         
     }
 
@@ -86,7 +88,7 @@ export class RegisterPage implements OnInit {
                 console.log(this.uploadInfo);
                 console.log(data);
             }
-            this.pushNewUser(this.uploadInfo);
+            this.imageHasBeenUploaded = true;
         });
 
         this.uploadService.progressStream.subscribe(data => {
@@ -95,6 +97,17 @@ export class RegisterPage implements OnInit {
         })
         this.users$ = this.db.list('/users');
     }
+
+    presentImageProfileIsNeededToast() {
+        const toast = this.toastCtrl.create({
+            message: 'Please, select a logo image from your cellphone.',
+            duration: 3000,
+            position: 'bottom',
+            showCloseButton: true
+        });
+        toast.present();
+    }
+
     pushNewUser(data: any): any {
         this.uploadService.getDownloadUrl(data.metadata.fullPath)
         .then(downloadUrl => {
@@ -102,18 +115,22 @@ export class RegisterPage implements OnInit {
             console.log(downloadUrl);
             if (this.isWatcher) {
                 let user: any = {
+                    docId: '',
                     name: this.name,
                     lastname: this.lastname,
                     email: this.email,
                     password: this.password,
                     profileImageUrl: downloadUrl,
-                    userType: "WATCHER"
+                    userType: "WATCHER",
+                    watchers: []
                 }
-                this.users$.push(user);
-                this.authService.register(user);
-                this.userInfo.addWatcher(user);
+                let addedKey = this.users$.push(user).key;
+                this.setPushedObjectKey(addedKey);
+                this.authService.register(user, addedKey);
+                this.userInfo.addWatcher(user, addedKey);
             }else {
                 let user: any = {
+                    docId: '',
                     name: this.nameProvider,
                     email: this.email,
                     password: this.password,
@@ -129,12 +146,17 @@ export class RegisterPage implements OnInit {
                     website: !!this.website? this.website : "",
                     logoUrl: !!this.logoUrl? this.logoUrl : ""
                 }
-                this.users$.push(user);
-                this.authService.register(user);
-    
-                this.userInfo.addProvider(user);
+                let addedKey = this.users$.push(user).key;
+                this.setPushedObjectKey(addedKey);
+                this.authService.register(user, addedKey);
+                this.userInfo.addProvider(user, addedKey);
             }
         }, err => {console.log(err)});
+    }
+    setPushedObjectKey(addedKey: string): any {
+        this.db.object(`/users/${addedKey}`).update({
+            docId: addedKey
+        });
     }
 
     private goToLoginPage(): void {
@@ -153,16 +175,19 @@ export class RegisterPage implements OnInit {
             
                 this.creatingWatcherLoading.present();
                 let user: any = {
+                    docId: '',
                     name: this.name,
                     lastname: this.lastname,
                     email: this.email,
                     password: this.password,
                     profileImageUrl: 'https://www.sherwoodchamber.net/media/com_jbusinessdirectory/pictures/companies/0/profileicon-1489087706.png',
-                    userType: "WATCHER"
+                    userType: "WATCHER",
+                    watchers: []
                 }
-                this.users$.push(user);
-                this.authService.register(user);
-                this.userInfo.addWatcher(user);
+                let addedKey = this.users$.push(user).key;
+                this.setPushedObjectKey(addedKey);
+                this.authService.register(user, addedKey);
+                this.userInfo.addWatcher(user, addedKey);
             } else {
                 console.log('Form not valid');
             }
@@ -173,9 +198,9 @@ export class RegisterPage implements OnInit {
 
                 this.creatingProviderLoading.present();
 
-                // We need to wait for the uploaded image to upload,
-                // then, we can continue this function in "pushNewUser"
-                // when the appropiate event is emitted!
+                if (this.imageHasBeenUploaded) {
+                    this.pushNewUser(this.uploadInfo);
+                }
 
             }else {
                 console.log('Form not valid');

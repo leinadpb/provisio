@@ -58,12 +58,8 @@ export class HomePage implements OnInit {
       }   
   }
 
-	private viewDetail(): void {
-	    this.navCtrl.push(DetailPage);
+	private viewDetail(email: string): void {
+	    this.navCtrl.push(DetailPage, {'email': email});
 	}
-
-  private viewProfilePage(): void {
-      this.navCtrl.push(ProfilePage);
-  }
 
 }

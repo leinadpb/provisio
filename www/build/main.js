@@ -12,7 +12,7 @@ webpackJsonp([1],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__register_register__ = __webpack_require__(347);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_Firebase_FirebaseService__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_user_info__ = __webpack_require__(351);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -87,9 +87,8 @@ var LoginPage = /** @class */ (function () {
         this.authenticated = this.authService.authenticationStream.subscribe(function (data) {
             if (data.loggedIn && !data.errors) {
                 _this.loginError = false;
-                // Get User Data
+                // Get User Data              
                 var loggedInUser = _this.registeredUsers.filter(function (u) { return u.email === _this.username; })[0];
-                //console.log(loggedInUser);
                 if (!!loggedInUser) {
                     if (loggedInUser.userType === 'WATCHER') {
                         _this.userInfo.addWatcher(loggedInUser);
@@ -187,9 +186,10 @@ var LoginPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__detail_detail__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_Firebase_FirebaseService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_user_info_UserInfoService__ = __webpack_require__(65);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -205,12 +205,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, authService, db, firebase) {
+    function HomePage(navCtrl, authService, db, firebase, userInfo) {
         this.navCtrl = navCtrl;
         this.authService = authService;
         this.db = db;
         this.firebase = firebase;
+        this.userInfo = userInfo;
         this.itemList = [];
         this.originalData = this.itemList;
         this.currentUser = this.authService.getUserEmail();
@@ -233,7 +235,7 @@ var HomePage = /** @class */ (function () {
         this.firebase.readAllUsers().subscribe(function (data) {
             console.log('DATA:');
             console.log(data);
-            _this.itemList = data.filter(function (x) { return x.userType === 'PROVIDER'; });
+            _this.itemList = data.filter(function (x) { return x.userType === 'PROVIDER' && x.email !== _this.userInfo.email; });
             _this.originalData = _this.itemList;
             console.log(_this.providers);
         });
@@ -255,7 +257,8 @@ var HomePage = /** @class */ (function () {
             selector: 'page-home',template:/*ion-inline-start:"/home/leinad/Desktop/provisio/src/pages/home/home.html"*/'<ion-header>\n\n  <ion-navbar text-center color="primary">\n    <ion-title>Provisio</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n  <ion-list>\n    <ion-item *ngFor="let p of itemList">\n      <ion-card text-wrap>\n        <img [src]="p.profileImageUrl" width="100%" height="200px"/>\n        <ion-card-content>\n          <ion-card-title>\n            {{p.name}}\n          </ion-card-title>\n          <p align="justify">\n           {{p.motto}}\n          </p>\n          <button ion-button icon-end float-right (click)="viewDetail(p.email)">\n            Ver\n            <ion-icon name="eye"></ion-icon>\n          </button>\n        </ion-card-content>\n      </ion-card>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/leinad/Desktop/provisio/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"], __WEBPACK_IMPORTED_MODULE_5__services_Firebase_FirebaseService__["a" /* FirebaseService */]])
+            __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"], __WEBPACK_IMPORTED_MODULE_5__services_Firebase_FirebaseService__["a" /* FirebaseService */],
+            __WEBPACK_IMPORTED_MODULE_6__services_user_info_UserInfoService__["a" /* UserInfoService */]])
     ], HomePage);
     return HomePage;
 }());
@@ -324,7 +327,7 @@ var AddproductPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__profile_profile__ = __webpack_require__(344);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__addproduct_addproduct__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_config_service__ = __webpack_require__(345);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_user_info_UserInfoService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_user_info_UserInfoService__ = __webpack_require__(65);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -550,7 +553,7 @@ var AboutPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_path__ = __webpack_require__(342);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_streaming_media__ = __webpack_require__(343);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_home__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_user_info_UserInfoService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_user_info_UserInfoService__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_Firebase_FirebaseService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -698,7 +701,7 @@ var DetailPage = /** @class */ (function () {
         __metadata("design:type", Number)
     ], DetailPage.prototype, "watchers", void 0);
     DetailPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/leinad/Desktop/provisio/src/pages/detail/detail.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>Detail</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-card>\n      <ion-row>\n          <ion-col col-7></ion-col>\n          <ion-col col-5 item-end>\n            <b>{{ (!!providerWatchers)? providerWatchers.length : 0 }}</b> observadores\n          </ion-col>\n        </ion-row>\n      <ion-item>\n        <ion-avatar item-start>\n          <img [src]="provider.profileImageUrl">\n        </ion-avatar>\n        <h2>{{ provider.name }}</h2>\n        <p>{{ provider.motto  }}</p>\n      </ion-item>\n\n      <ion-row style="text-align: center;">\n        <ion-col>\n          <button ion-button icon-start clear small (click)="toggleVideo()" color=\'danger\'>\n            <ion-icon isActive="true" name="logo-youtube"></ion-icon>\n          </button>\n        </ion-col>\n        <ion-col>\n          <button ion-button icon-start clear small (click)="toggleAudio()" color=\'dark\'>\n            <ion-icon isActive="false" name="megaphone"></ion-icon>\n          </button>\n        </ion-col>\n        <ion-col>\n          <button *ngIf="!currentUserIsWatchingViewingProvider" ion-button icon-start clear small (click)="startWatching()" color=\'light\'>\n            <ion-icon isActive="true" name="eye"></ion-icon>\n          </button>\n          <button *ngIf="currentUserIsWatchingViewingProvider" ion-button icon-start clear small (click)="stopWatching()" color=\'light\'>\n            <ion-icon isActive="false" name="eye-off"></ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n  </ion-card>\n\n  <ion-card>\n    <ion-item>\n      <p style="font-size:16px;font-style:regular;">\n          <b>Informacion del Proveedor</b> <span class="right"> </span>\n      </p>\n    </ion-item>\n    <ion-list>\n        <ion-item>\n            <ion-label><strong>Nombre:</strong> {{ provider.name }}</ion-label>\n        </ion-item>\n            <ion-item>\n            <ion-label><strong>Lema:</strong> {{ provider.motto }}</ion-label>\n        </ion-item>\n        <ion-item>\n            <ion-label><strong>Categoria: </strong> Comidas y Bebidas</ion-label>\n        </ion-item>\n        <ion-item>\n            <ion-label><strong>Website: </strong> {{ provider.website }}</ion-label>\n        </ion-item>\n    </ion-list>\n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/home/leinad/Desktop/provisio/src/pages/detail/detail.html"*/,
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/leinad/Desktop/provisio/src/pages/detail/detail.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>Detail</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-card>\n      <ion-row>\n          <ion-col col-7></ion-col>\n          <ion-col col-5 item-end>\n            <b>{{ (!!providerWatchers)? providerWatchers.length : 0 }}</b> observadores\n          </ion-col>\n        </ion-row>\n      <ion-item>\n        <ion-avatar item-start>\n          <img [src]="provider.profileImageUrl">\n        </ion-avatar>\n        <h2>{{ provider.name }}</h2>\n        <p>{{ provider.motto  }}</p>\n      </ion-item>\n\n      <ion-row style="text-align: center;">\n        <ion-col>\n          <button ion-button icon-start clear small (click)="toggleVideo()" color=\'danger\'>\n            <ion-icon isActive="true" name="logo-youtube"></ion-icon>\n          </button>\n        </ion-col>\n        <ion-col>\n          <button ion-button icon-start clear small (click)="toggleAudio()" color=\'dark\'>\n            <ion-icon isActive="false" name="megaphone"></ion-icon>\n          </button>\n        </ion-col>\n        <ion-col>\n          <button *ngIf="!currentUserIsWatchingViewingProvider" ion-button icon-start clear small (click)="startWatching()" color=\'light\'>\n            <ion-icon isActive="true" name="eye"></ion-icon>\n          </button>\n          <button *ngIf="currentUserIsWatchingViewingProvider" ion-button icon-start clear small (click)="stopWatching()" color=\'light\'>\n            <ion-icon isActive="false" name="eye-off"></ion-icon>\n          </button>\n        </ion-col>\n      </ion-row>\n  </ion-card>\n\n  <ion-card>\n    <ion-item>\n      <p style="font-size:16px;font-style:regular;">\n          <b>Informacion del Proveedor</b> <span class="right"> </span>\n      </p>\n    </ion-item>\n    <ion-list>\n        <ion-item>\n            <ion-label><strong>Nombre:</strong> {{ provider.name }}</ion-label>\n        </ion-item>\n            <ion-item>\n            <ion-label><strong>Lema:</strong> {{ provider.motto }}</ion-label>\n        </ion-item>\n        <ion-item>\n            <ion-label><strong>Categoria: </strong> {{ provider.category }}</ion-label>\n        </ion-item>\n        <ion-item>\n          <ion-label><strong>Telefono: </strong> {{ provider.phone }}</ion-label>\n      </ion-item>\n        <ion-item>\n            <ion-label><strong>Website: </strong> {{ provider.website }}</ion-label>\n        </ion-item>\n    </ion-list>\n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/home/leinad/Desktop/provisio/src/pages/detail/detail.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_youtube_video_player__["a" /* YoutubeVideoPlayer */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_path__["a" /* FilePath */],
@@ -723,7 +726,7 @@ var DetailPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_user_info_UserInfoService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_user_info_UserInfoService__ = __webpack_require__(65);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -803,7 +806,7 @@ var ProfilePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_service__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_upload_file__ = __webpack_require__(591);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_user_info__ = __webpack_require__(351);
@@ -906,9 +909,6 @@ var RegisterPage = /** @class */ (function () {
             if (data.success) {
                 _this.uploadInfo = data.uploadInfo;
                 _this.disabledCreate = false;
-                console.log('UPLOAD SERVICE STREAM DATA SUCCEED:');
-                console.log(_this.uploadInfo);
-                console.log(data);
             }
             _this.imageHasBeenUploaded = true;
         });
@@ -1323,7 +1323,7 @@ var UploadFileService = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserInfoService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserInfoService__ = __webpack_require__(65);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__UserInfoService__["a"]; });
 
 //# sourceMappingURL=index.js.map
@@ -1371,7 +1371,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_config_service__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_Firebase_FirebaseService__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_upload_file_UploadFileService__ = __webpack_require__(348);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_user_info_UserInfoService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_user_info_UserInfoService__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_storage__ = __webpack_require__(316);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_native_audio__ = __webpack_require__(341);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_youtube_video_player__ = __webpack_require__(340);
@@ -1386,7 +1386,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_33_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_angularfire2_auth__ = __webpack_require__(318);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_angularfire2_database__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_angularfire2_database__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_Firebase_FirebaseConfig__ = __webpack_require__(603);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1918,7 +1918,7 @@ var firebaseConfig = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(318);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1954,8 +1954,6 @@ var FirebaseService = /** @class */ (function () {
         return this.db.list("/users").valueChanges();
     };
     FirebaseService.prototype.removeProviderFromUserWatchersList = function (watcherEmail, providerEmail, watcherDocId, providerDocId) {
-        console.log('Will remove from wacher list >>>> ');
-        console.log(watcherEmail, providerEmail, watcherDocId, providerDocId);
         var user = this.db.object("/users/" + watcherDocId);
         var provider = this.db.object("/users/" + providerDocId);
         // GET curretn watchers list
@@ -1994,8 +1992,6 @@ var FirebaseService = /** @class */ (function () {
         var providerCurrentWatchersFetched = false;
         user.valueChanges().subscribe(function (data) {
             userCurrentWatchers = (!!data.watchers) ? data.watchers : [];
-            console.log('After values changes: ');
-            console.log(data);
             if (!userCurrentWatchersFetched) {
                 user.update({
                     watchers: userCurrentWatchers.concat([providerEmail])
@@ -2005,8 +2001,6 @@ var FirebaseService = /** @class */ (function () {
         });
         provider.valueChanges().subscribe(function (data) {
             providerCurrentWatchers = (!!data.watchers) ? data.watchers : [];
-            console.log('After values changes: ');
-            console.log(data);
             if (!providerCurrentWatchersFetched) {
                 provider.update({
                     watchers: providerCurrentWatchers.concat([watcherEmail])
@@ -2032,7 +2026,7 @@ var FirebaseService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 88:
+/***/ 65:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

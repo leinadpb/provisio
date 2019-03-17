@@ -5,6 +5,7 @@ import { DetailPage } from '../detail/detail';
 import { ProfilePage } from '../profile/profile';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseService } from '../../services/Firebase/FirebaseService';
+import { UserInfoService } from '../../services/user-info/UserInfoService';
 
 @Component({
   selector: 'page-home',
@@ -20,7 +21,8 @@ export class HomePage implements OnInit {
   private providers: any[];
 
   constructor(public navCtrl: NavController, private authService: AuthService,
-    private db: AngularFireDatabase, private firebase: FirebaseService) {
+    private db: AngularFireDatabase, private firebase: FirebaseService,
+    private userInfo: UserInfoService) {
     this.currentUser = this.authService.getUserEmail();
     this.isLoggedIn = this.authService.isAuthenticated();
   }
@@ -42,7 +44,7 @@ export class HomePage implements OnInit {
     this.firebase.readAllUsers().subscribe((data: any[]) => {
       console.log('DATA:');
       console.log(data);
-      this.itemList = data.filter(x => x.userType === 'PROVIDER');
+      this.itemList = data.filter(x => x.userType === 'PROVIDER' && x.email !== this.userInfo.email);
       this.originalData = this.itemList;
       console.log(this.providers);
     });

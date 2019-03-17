@@ -44,11 +44,8 @@ export class LoginPage implements OnInit, ErrorHandler, OnDestroy {
             if (data.loggedIn && !data.errors) {
                 this.loginError = false;
                 
-                // Get User Data
-                
+                // Get User Data              
                 let loggedInUser = this.registeredUsers.filter(u => u.email === this.username)[0];
-                //console.log(loggedInUser);
-
                 if (!!loggedInUser) {
                     if (loggedInUser.userType === 'WATCHER') {
                         this.userInfo.addWatcher(loggedInUser);

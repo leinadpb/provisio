@@ -32,8 +32,6 @@ export class FirebaseService implements OnInit{
     }
 
     removeProviderFromUserWatchersList(watcherEmail, providerEmail, watcherDocId, providerDocId) {
-        console.log('Will remove from wacher list >>>> ');
-        console.log(watcherEmail, providerEmail, watcherDocId, providerDocId);
         let user = this.db.object(`/users/${watcherDocId}`);
         let provider = this.db.object(`/users/${providerDocId}`);
         // GET curretn watchers list
@@ -76,8 +74,6 @@ export class FirebaseService implements OnInit{
 
         user.valueChanges().subscribe((data: any) => {
             userCurrentWatchers = (!!data.watchers)? data.watchers : [];
-            console.log('After values changes: ');
-            console.log(data);
             if (!userCurrentWatchersFetched) {
                 user.update({
                     watchers: [...userCurrentWatchers, providerEmail]
@@ -88,8 +84,6 @@ export class FirebaseService implements OnInit{
 
         provider.valueChanges().subscribe((data: any) => {
             providerCurrentWatchers = (!!data.watchers)? data.watchers : [];
-            console.log('After values changes: ');
-            console.log(data);
             if (!providerCurrentWatchersFetched) {
                 provider.update({
                     watchers: [...providerCurrentWatchers, watcherEmail]

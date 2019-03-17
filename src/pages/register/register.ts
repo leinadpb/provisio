@@ -84,9 +84,6 @@ export class RegisterPage implements OnInit {
             if (data.success) {
                 this.uploadInfo = data.uploadInfo;
                 this.disabledCreate = false;
-                console.log('UPLOAD SERVICE STREAM DATA SUCCEED:');
-                console.log(this.uploadInfo);
-                console.log(data);
             }
             this.imageHasBeenUploaded = true;
         });

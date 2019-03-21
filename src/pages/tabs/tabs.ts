@@ -1,17 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { AboutPage } from '../about/about';
 import { HomePage } from '../home/home';
 import { ProfilePage } from '../profile/profile';
 import { AddproductPage } from '../addproduct/addproduct';
 
-import { ConfigService } from '../../services/config-service';
 import { UserInfoService } from '../../services/user-info/UserInfoService';
 
 @Component({
   templateUrl: 'tabs.html'
 })
-export class TabsPage implements OnInit {
+export class TabsPage {
 
   private homePage = HomePage;
   private profilePage = ProfilePage;
@@ -26,7 +25,7 @@ export class TabsPage implements OnInit {
   @Input() private contactTitle: string;
   @Input() private profileTitle: string;
 
-  constructor(private configs: ConfigService, private user: UserInfoService) {
+  constructor(private user: UserInfoService) {
     if (user.type === 'WATCHER') {
       this.isProvider = false;
     }else {
@@ -34,13 +33,5 @@ export class TabsPage implements OnInit {
     }
     console.log(user);
     console.log(`USER TYPE IS: ${user.type}`);
-  }
-
-  ngOnInit(): void {
-    this.configs.getJSON().subscribe(data => {
-      this.homeTitle = data['APP_NAME'];
-      this.aboutTitle = data['APP_NAME'];
-      this.contactTitle = data['APP_NAME'];
-    });
   }
 }

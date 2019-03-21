@@ -3,17 +3,15 @@
   <ion-navbar color="primary">
     <ion-title>Productos</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items">
+    <ion-item *ngFor="let item of productList">
       <ion-avatar item-start>
-        <img [src]="item.url">
+        <img [src]="item.imageUrl">
       </ion-avatar>
-      <h2>{{item.title}}</h2>
+      <h2>{{item.name}}</h2>
       <p>{{item.description}}</p>
     </ion-item>
   </ion-list>

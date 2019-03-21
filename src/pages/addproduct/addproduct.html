@@ -14,37 +14,19 @@
 	</ion-item>
 </ion-card>
 <ion-item>
+  <button ion-button (click)="loadItems()">Load</button>
   <button ion-button item-end float-right round (click)="viewCreateProductPage()">
     <ion-icon name="add" item-start></ion-icon> Agregar Nuevo
   </button>
 </ion-item>
 <ion-list>
-  <ion-item>
+  <ion-item *ngFor="let p of productList">
     <ion-thumbnail item-start>
-      <img src="https://ui.assets-asda.com/dm/asdagroceries/5900020031372_T1?defaultImage=asdagroceries/noImageAvailable&resMode=sharp2&id=sSbSn0&fmt=jpg&fit=constrain,1&wid=280&hei=280">
+      <img [src]="p.imageUrl">
     </ion-thumbnail>
-    <h2>Nesquik Cereal</h2>
-    <p>Cereal Nesquik de Chocolate</p>
-    <button ion-button clear item-end (click)="viewCreateProductPage()">Editar</button>
-    <button ion-button clear item-end color='danger'>Eliminar</button>
-  </ion-item>
-  <ion-item>
-    <ion-thumbnail item-start>
-      <img src="https://images-na.ssl-images-amazon.com/images/I/91wlWwFYbWL._AC_UL200_SR200,200_.jpg">
-    </ion-thumbnail>
-    <h2>Nescafé Clásico</h2>
-    <p>Café oscuro</p>
-    <button ion-button clear item-end (click)="viewCreateProductPage()">Editar</button>
-    <button ion-button clear item-end color='danger'>Eliminar</button>
-  </ion-item>
-  <ion-item>
-    <ion-thumbnail item-start>
-      <img src="https://storage.googleapis.com/zopnow-static/images/products/320/nestle-milk-chocolate-v-18-g.png">
-    </ion-thumbnail>
-    <h2>Nestlé Classic</h2>
-    <p>Barra de chocolate</p>
-    <button ion-button clear item-end (click)="viewCreateProductPage()">Editar</button>
-    <button ion-button clear item-end color='danger'>Eliminar</button>
+    <h2>{{ p.name }}</h2>
+    <p>{{ p.description }}</p>
+    <button ion-button clear item-end color='danger' (click)=deleteProduct(p.id)>Eliminar</button>
   </ion-item>
 </ion-list>
 

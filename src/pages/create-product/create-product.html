@@ -16,32 +16,23 @@
 <ion-content padding>
   <ion-item>
     <ion-label floating>Nombre</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="name" type="text"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Descripción</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="description" type="text"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Categoría</ion-label>
-    <ion-select>
-      <ion-option value="nes">Comidas o Bebidas</ion-option>
-      <ion-option value="n64">Categoria 2</ion-option>
-      <ion-option value="ps">Categoria 3</ion-option>
+    <ion-select [(ngModel)]="category">
+      <ion-option value="Comidas o Bebidas">Comidas o Bebidas</ion-option>
+      <ion-option value="Categoria 2">Categoria 2</ion-option>
+      <ion-option value="Categoria 3">Categoria 3</ion-option>
     </ion-select>
   </ion-item>
-  <ion-item>
-    <ion-label stacked>Videos</ion-label>
-    <ion-input name="video" type="file"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Audios</ion-label>
-    <ion-input name="audio" type="file"></ion-input>
-  </ion-item>      
-
   <ion-row>
     <ion-col text-center>
-      <button ion-button block color="default" (click)="viewAddProductPage()">
+      <button ion-button block color="default" (click)="saveProduct()">
         Guardar
       </button>
     </ion-col>

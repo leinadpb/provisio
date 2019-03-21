@@ -1,34 +1,24 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component  } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { SqlService } from '../../services/sql-service/SqlService';
+import { UserInfoService } from '../../services/user-info';
 
 @Component({
   templateUrl: 'ver-producto.html',
 })
 export class VerProductoPage {
 
-  private items: Array<any> = [
-    {
-      url: "https://cdn.shopify.com/s/files/1/2362/7179/products/Nestle_Cocoa_Instant_Powder_180_grams_2048x.jpg",
-      title: "Cocoa nestle",
-      description: "Un producto para pasarla en familia."
-    },
-    {
-      url: "https://cdn.shopify.com/s/files/1/2362/7179/products/Nestle_Cocoa_Instant_Powder_180_grams_2048x.jpg",
-      title: "Cocoa nestle",
-      description: "Un producto para pasarla en familia."
-    },
-    {
-      url: "https://cdn.shopify.com/s/files/1/2362/7179/products/Nestle_Cocoa_Instant_Powder_180_grams_2048x.jpg",
-      title: "Cocoa nestle",
-      description: "Un producto para pasarla en familia."
-    },
-    {
-      url: "https://cdn.shopify.com/s/files/1/2362/7179/products/Nestle_Cocoa_Instant_Powder_180_grams_2048x.jpg",
-      title: "Cocoa nestle",
-      description: "Un producto para pasarla en familia."
-    }
-  ];
+  private productList: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private sqlService: SqlService, private userInfo: UserInfoService) { }
+
+  ionViewWillEnter() {
+    this.sqlService.getProductsByEmail(this.userInfo.email).then(data => {
+      this.productList = data;
+      console.log('FETCHED PRODUCTS');
+      console.log(this.productList);
+    });
+  }
   
 }

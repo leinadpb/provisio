@@ -29,7 +29,7 @@ export class SqlService {
             })
             .then((db: SQLiteObject) => {
                 this.database = db;
-                this.storage.get('database_filled').then(val => {
+                this.storage.get('database_filled_2').then(val => {
                     if (val) {
                         this.databaseReady.next(true);
                     } else {
@@ -43,15 +43,54 @@ export class SqlService {
     /** GET */
     getAllCategories() {
         return this.database.executeSql(`SELECT * from ${this.dbNameCategories} 
-        ORDER BY created_at asc`);
+        ORDER BY created_at asc`, []);
     }
     getAllProducts() {
         return this.database.executeSql(`SELECT * from ${this.dbNameProducts}
-        ORDER BY created_at asc`);
+        ORDER BY created_at asc`, []).then(data => {
+            let items = [];
+            if (data.rows.length > 0) {
+                for(let i = 0; i < data.rows.length; i++){
+                    items.push({
+                        name: data.rows.item(i).name,
+                        description: data.rows.item(i).description,
+                        id: data.rows.item(i).id,
+                        created: data.rows.item(i).created_at,
+                        imageUrl: data.rows.item(i).image_url
+                    });
+                }
+            }
+            return items;
+        }, err => {
+            console.log(err);
+            return [];
+        });
     }
     getProductsByEmail(email: string) {
+        console.log(email);
+        let data = [email];
         return this.database.executeSql(`SELECT * from ${this.dbNameProducts}
-        WHERE user_email = lower(${email})`);
+        WHERE user_email like (?)`, data)
+        .then(data => {
+            let items = [];
+            console.log('Inside functions');
+            console.log(data);
+            if (data.rows.length > 0) {
+                for(let i = 0; i < data.rows.length; i++){
+                    items.push({
+                        name: data.rows.item(i).name,
+                        description: data.rows.item(i).description,
+                        id: data.rows.item(i).id,
+                        created: data.rows.item(i).created_at,
+                        imageUrl: data.rows.item(i).image_url
+                    });
+                }
+            }
+            return items;
+        }, err => {
+            console.log(err);
+            return [];
+        });
     }
 
     /** ADD */
@@ -66,7 +105,9 @@ export class SqlService {
         let data = [name, description, image_url, user_email, date.getTime(), date.getTime()];
         return this.database.executeSql(`INSERT INTO ${this.dbNameProducts}
         (name, description, image_url, user_email, created_at, last_modified)
-        VALUES (?, ?, ?, ?, ?, ?)`, data);
+        VALUES (?, ?, ?, ?, ?, ?)`, data).then(() => {
+            return true;
+        }, (err) => {console.log(err)});
     }
 
     /** DELETE (maldito delete xd) */
@@ -81,6 +122,12 @@ export class SqlService {
         return this.database.executeSql(`DELETE FROM ${this.dbNameProducts}
         WHERE user_email = lower(${email})`);
     }
+    deleteProduct(id: any) {
+        return this.database.executeSql(`DELETE FROM ${this.dbNameProducts}
+        WHERE id = ${id}`, []).then(() => {
+            return true;
+        }, err => { console.log(err); return false; })
+    }
     
     /** Useful functions */
     clearStorage() {
@@ -93,7 +140,7 @@ export class SqlService {
             this.sqlitePorter.importSqlToDb(this.database, sql)
             .then(data => {
                 this.databaseReady.next(true);
-                this.storage.set('database_filled', true);
+                this.storage.set('database_filled_2', true);
             })
             .catch(err => console.log(err));
         })

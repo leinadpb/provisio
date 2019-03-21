@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, LoadingController } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 
 // Pages
@@ -24,10 +24,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // Services
 import { AuthService } from '../services/auth-service';
 import { SqliteDatabaseService } from '../services/sqlite-database-service';
-import { ConfigService } from '../services/config-service';
 import { FirebaseService } from '../services/Firebase/FirebaseService';
 import { UploadFileService } from '../services/upload-file/UploadFileService';
 import { UserInfoService } from '../services/user-info/UserInfoService';
+import { SqlService } from '../services/sql-service/SqlService';
 
 // Plugins
 import { IonicStorageModule } from '@ionic/storage';
@@ -65,7 +65,7 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule,
+    HttpModule,
     // Plugin
     IonicStorageModule.forRoot(),
     // Firebase
@@ -87,12 +87,12 @@ import { firebaseConfig } from '../services/Firebase/FirebaseConfig';
   ],
   providers: [
     // Ours
-    ConfigService,
     AuthService,
     SqliteDatabaseService,
     FirebaseService,
     UploadFileService,
     UserInfoService,
+    SqlService,
 
     // Ionic
     StatusBar,
